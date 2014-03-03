@@ -1,0 +1,18 @@
+.activity {
+    margin: 5px;
+    padding: 5px;
+}
+
+.activity-presentation {
+    background-color: #ff2d23;
+}
+.activity-group-work {
+    background-color: #25b219;
+}
+.activity-discussion {
+    background-color: #e5e100;
+}
+.activity-break {
+    background-color: #184fff;
+}
+

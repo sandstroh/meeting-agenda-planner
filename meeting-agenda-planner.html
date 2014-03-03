@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Meeting Agenda Planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+    <!-- Other stylesheets -->
+    <link rel="stylesheet" href="stylesheets/activities.css">
+
+</head>
+<body>
+
+    <script>
+        function allowDrop(ev)
+        {
+            ev.preventDefault();
+        }
+        function drop(ev)
+        {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Activities:</h4>
+                <div id="activitiesView" style="border: solid black 1px; min-height: 200px">
+                    <!--<div id="text1" draggable="true" ondragstart="drag(event)">Activity 1</div>-->
+                    <!--<div id="text2" draggable="true" ondragstart="drag(event)">Activity 2</div>-->
+                </div>
+                <button class="btn" data-toggle="modal" data-target="#addNewActivityView">Add Activity</button>
+            </div>
+            <div id="meetingsView" class="col-md-8">
+                <h4>Meeting:</h4>
+                <div id="dayViewsContainer" style="border: black solid 1px;">
+                    <!-- container for days -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addNewActivityView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add New Activity...</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>Name:</td>
+                            <td><input id="activityName" type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>Length:</td>
+                            <td><input id="activityLength" type="number" min="1" max="1440"/>min</td>
+                        </tr>
+                        <tr>
+                            <td>Type:</td>
+                            <td>
+                                <select id="activityType">
+                                    <option value="0">Presentation</option>
+                                    <option value="1">Group Work</option>
+                                    <option value="2">Discussion</option>
+                                    <option value="3">Break</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td><input id="activityDescription" type="text"/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelAddingNewActivityButton" type="button"
+                            class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="addNewActivityButton" type="button"
+                            class="btn btn-primary" data-dismiss="modal">Add Activity</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+    <script src="js/model/meetingAgendaPlannerModel.js"></script>
+
+    <script src="js/view/activitiesView.js"></script>
+    <script src="js/controller/activitiesController.js"></script>
+    <script src="js/view/addNewActivityView.js"></script>
+    <script src="js/controller/addNewActivityController.js"></script>
+    <script src="js/view/meetingsView.js"></script>
+    <script src="js/view/dayView.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
