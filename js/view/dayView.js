@@ -40,8 +40,11 @@ var DayView = function (container, model, day) {
         dayTable.append(trLength);
 
         // canvas
-        var canvas = $('<canvas>');
-        var canvasView = new CanvasView(canvas, model, day);
+        var canvas = $('<canvas>')
+        // we have to pass canvas.get(0) to the view because the created
+        // canvas object is an jquery object and not a pure canvas element
+        // see: http://stackoverflow.com/questions/5808162/getcontext-is-not-a-function
+        var canvasView = new CanvasView(canvas.get(0), model, day);
 
 
         // activities
