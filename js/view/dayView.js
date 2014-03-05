@@ -7,6 +7,7 @@ var DayView = function (container, model, day) {
 
         var dayDiv = $('<div>');
         dayDiv.attr('style', 'max-width: 200px;');
+
         var dayTable = $('<table>');
 
         // start time:

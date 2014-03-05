@@ -12,6 +12,7 @@ var MeetingsView = function(container, model) {
         for (var i = 0; i < model.days.length; i++) {
             var dayDiv = $('<div>');
             var dayView = new DayView(dayDiv, model, model.days[i]);
+            var dayController = new DayController(dayView, model, model.days[i]);
             this.dayViewsContainer.append(dayDiv);
         }
 

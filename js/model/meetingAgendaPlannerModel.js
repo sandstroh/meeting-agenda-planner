@@ -218,10 +218,10 @@ function MeetingAgendaPlannerModel(){
 
         this.addDay();
         this.addActivity(new Activity("Introduction", 10, 0, ""), 0);
-        this.addActivity(new Activity("Idea 1", 30, 0, ""), 0);
-        this.addActivity(new Activity("Working in groups", 35, 1, ""), 0);
-        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
-        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
+//        this.addActivity(new Activity("Idea 1", 30, 0, ""), 0);
+//        this.addActivity(new Activity("Working in groups", 35, 1, ""), 0);
+//        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
+//        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
 
         this.addDay();
         this.addActivity(new Activity("Presentation", 30, 0, ""), 1);

@@ -32,6 +32,7 @@ var ActivitiesView = function(container, model) {
                 default:
                     console.log('Error: unknown activity type \'' + activities[i].getTypeId() + '\'');
             }
+            activityDiv.attr('draggable', true);
             container.append(activityDiv);
         }
 

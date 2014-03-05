@@ -3,16 +3,13 @@
  */
 var ActivitiesController = function(view, model) {
 
+    $('.activity').click(function (event) {
+        console.log('on dragstart()');
+       drag(event);
+    });
 
-//    var activityDivs = $(".activity");
-//    console.log(activityDivs.length + ' activity divs found');
-//    for (var i = 0; i < activityDivs.length; i++) {
-//        activityDivs.attr('draggable', true);
-//        activityDivs.attr('ondragstart', drag(event));
-//    }
-//
-//    function drag(ev) {
-//        ev.dataTransfer.setData("Text",ev.target.id);
-//    }
+    function drag(ev) {
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }
 
 }
