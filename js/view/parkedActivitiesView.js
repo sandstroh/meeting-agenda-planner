@@ -3,6 +3,9 @@
  */
 var ActivitiesView = function(container, model) {
 
+    this.container = container;
+    this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
+
     // register an observer to the model
     model.addObserver(this);
 
@@ -11,8 +14,8 @@ var ActivitiesView = function(container, model) {
 
         console.log('activitiesView.update()');
 
-        // reset view, delete all previous activities
-        container.html('');
+        // reset parked activities container (delete all previous parked activities)
+        this.parkedActivitiesContainer.empty();
 
         // add all parked activities
         var activities = model.parkedActivities;
@@ -33,7 +36,7 @@ var ActivitiesView = function(container, model) {
                     console.log('Error: unknown activity type \'' + activities[i].getTypeId() + '\'');
             }
             activityDiv.attr('draggable', true);
-            container.append(activityDiv);
+            this.parkedActivitiesContainer.append(activityDiv);
         }
 
     }
