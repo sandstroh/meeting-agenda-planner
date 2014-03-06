@@ -16,9 +16,10 @@ var MeetingsView = function(container, model) {
     this.update = function() {
 
         console.log('meetingsView.update()');
+        console.log('#days = ' + model.days.length);
 
         // clear day views container before adding the days in the model
-        this.dayViewsContainer.html('');
+        this.dayViewsContainer.empty();
 
         var meetingTable = $('<table>');
         meetingTable.addClass("table table-bordered");
@@ -38,7 +39,10 @@ var MeetingsView = function(container, model) {
             trTag.append(column);
             meetingTable.append(trTag);
             this.dayViewsContainer.append(meetingTable);
+
         }
     }
+
     this.update();
+
 }

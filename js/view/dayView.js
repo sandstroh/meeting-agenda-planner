@@ -3,7 +3,7 @@
  */
 var DayView = function (container, model, day) {
 
-    model.addObserver(this);
+//    model.addObserver(this);
 
     this.update = function () {
 
@@ -53,7 +53,6 @@ var DayView = function (container, model, day) {
 
         // activities
         this.activitiesDiv = $('<div>');
-//        this.activitiesDiv.attr('style', 'border: solid black 1px; min-height: 100px;');
         this.activitiesDiv.addClass('activitiesDiv');
 
         for (var i = 0; i < day.getActivities().length; i++) {
@@ -86,7 +85,6 @@ var DayView = function (container, model, day) {
 
         dayDiv.append(dayTable)
         dayDiv.append(canvas);
-        //dayDiv.append(activitiesDiv);
 
         container.append(dayDiv);
 
