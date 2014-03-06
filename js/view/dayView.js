@@ -9,6 +9,7 @@ var DayView = function (container, model, day) {
         dayDiv.attr('style', 'max-width: 200px;');
 
         var dayTable = $('<table>');
+        dayTable.addClass("table table-bordered");
 
         // start time:
         var trStart = $('<tr>');
@@ -73,12 +74,16 @@ var DayView = function (container, model, day) {
                     console.log('Error: unknown activity type \'' + day.getActivities()[i].getTypeId() + '\'');
             }
             activitiesDiv.append(activityDiv);
-
+            var trActivity = $("<tr>");
+            var tdActivity = $("<td>");
+            tdActivity.append(activitiesDiv);
+            trActivity.append(tdActivity);
+            dayTable.append(trActivity);
         }
 
         dayDiv.append(dayTable)
         dayDiv.append(canvas);
-        dayDiv.append(activitiesDiv);
+        //dayDiv.append(activitiesDiv);
 
         container.append(dayDiv);
 

@@ -6,6 +6,7 @@ var ActivitiesController = function(view, model) {
     $('.activity').click(function (event) {
         console.log('on dragstart()');
        drag(event);
+
     });
 
     function drag(ev) {
