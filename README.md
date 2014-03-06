@@ -1,6 +1,6 @@
-Interaction Programing - Final Project - HTML
-=============================================
+Interaction Programing - Lab assignment - HTML
+=================================================
 
-This project contains the code for the HTML version of the proposed idea of a meeting agenda planner.
+This project contains the startup code for HTML version of the Interaction Programing course lab assignment. For more details on how to complete the assignment follow the instructions on the [course website](https://www.kth.se/social/course/DH2641).
 
-To start: run index.html
+Group 26: Run index.html
