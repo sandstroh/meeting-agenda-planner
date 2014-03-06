@@ -11,6 +11,17 @@
 
 <body>
 
+    <style>
+        #testContainer {
+            border: 1px solid black;
+            min-height: 200px;
+            margin: 10px;
+        }
+        #testContainer.over {
+            border: 2px dashed red;
+        }
+    </style>
+
     <script>
 
         function dragStart(event) {
@@ -21,22 +32,25 @@
 
         function dragEnter(event) {
             console.log("dragEnter()");
-            event.target.style.border = 'dashed red 1px;';
+            event.target.classList.add('over');
         }
 
         function dragOver(event) {
             console.log("dragOver()");
-            event.preventDefault();
+            if (event.preventDefault) {
+                event.preventDefault();
+            }
         }
 
         function dragLeave(event) {
             console.log("dragLeave()");
-            event.target.style.border = 'solid black 1px;';
+            event.target.classList.remove('over');
         }
 
         function dragDrop(event) {
             console.log("dragDrop()");
             event.preventDefault();
+            event.target.classList.remove('over');
             var data = event.dataTransfer.getData("Text");
             event.target.appendChild(document.getElementById(data));
         }
@@ -61,13 +75,12 @@
                      ondragstart="dragStart(event)">Test 4</div>
             </div>
 
-            <div class="col-md-8" style="border: solid black 1px; min-height: 200px; margin: 10px;">
-                <div id="testContainer"
-                     ondragover="dragOver(event)"
-                     ondrop="dragDrop(event)"
-                     ondragenter="dragEnter(event)"
-                     ondragleave="dragLeave(event)">
-                </div>
+            <div id="testContainer"
+                 class="col-md-8"
+                 ondragover="dragOver(event)"
+                 ondrop="dragDrop(event)"
+                 ondragenter="dragEnter(event)"
+                 ondragleave="dragLeave(event)">
             </div>
 
         </div>
