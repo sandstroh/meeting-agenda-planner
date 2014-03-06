@@ -3,14 +3,14 @@
  */
 var ActivitiesController = function(view, model) {
 
-    $('.activity').click(function (event) {
-        console.log('on dragstart()');
-       drag(event);
-
+    $('.activity').on('dragstart', this, function(event) {
+        console.log('dragstart()');
+        event.originalEvent.dataTransfer.setData("Text", event.target);
     });
 
-    function drag(ev) {
-        ev.dataTransfer.setData("Text",ev.target.id);
-    }
+    $('.activity').on('dragend', this, function(event) {
+        console.log('dragend()');
+    });
+
 
 }

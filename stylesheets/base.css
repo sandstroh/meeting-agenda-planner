@@ -1,0 +1,11 @@
+#dayViewsContainer {
+    border: black solid 1px;
+}
+
+.activitiesDiv {
+    border: solid black 1px;
+    min-height: 100px;
+}
+.activitiesDiv.over {
+    border: dashed red 2px;
+}
