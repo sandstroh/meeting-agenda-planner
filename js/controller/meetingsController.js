@@ -3,8 +3,8 @@
  */
 var MeetingsController = function(view, model) {
 
+    // TODO: in meetingsView -> clear daysViewContainer before update
     view.addDayButton.click(function() {
-        console.log('adding day...');
         model.addDay();
     });
 
