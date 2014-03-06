@@ -17,6 +17,9 @@ var MeetingsView = function(container, model) {
 
         console.log('meetingsView.update()');
 
+        // clear day views container before adding the days in the model
+        this.dayViewsContainer.html('');
+
         var meetingTable = $('<table>');
         meetingTable.addClass("table table-bordered");
         meetingTable.attr("id","meeting-table");

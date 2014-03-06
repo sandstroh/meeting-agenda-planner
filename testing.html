@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Caution! Testing Area!</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <script>
+
+        function dragStart(event) {
+            console.log("dragstart()");
+            event.dataTransfer.setData("Text",event.target.id);
+//            event.target.style.opacity = '0.5';
+        }
+
+        function dragEnter(event) {
+            console.log("dragEnter()");
+            event.target.style.border = 'dashed red 1px;';
+        }
+
+        function dragOver(event) {
+            console.log("dragOver()");
+            event.preventDefault();
+        }
+
+        function dragLeave(event) {
+            console.log("dragLeave()");
+            event.target.style.border = 'solid black 1px;';
+        }
+
+        function dragDrop(event) {
+            console.log("dragDrop()");
+            event.preventDefault();
+            var data = event.dataTransfer.getData("Text");
+            event.target.appendChild(document.getElementById(data));
+        }
+
+    </script>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3" style="border: solid black 1px; min-height: 200px; margin: 10px;">
+                <div id="test1"
+                     style="background-color: #ff2d23; margin: 5px;" draggable="true"
+                     ondragstart="dragStart(event)">Test 1</div>
+                <div id="test2"
+                     style="background-color: #73ff1c; margin: 5px;" draggable="true"
+                     ondragstart="dragStart(event)">Test 2</div>
+                <div id="test3"
+                     style="background-color: #ffb32d; margin: 5px;" draggable="true"
+                     ondragstart="dragStart(event)">Test 3</div>
+                <div id="test4"
+                     style="background-color: #5283ff; margin: 5px;" draggable="true"
+                     ondragstart="dragStart(event)">Test 4</div>
+            </div>
+
+            <div class="col-md-8" style="border: solid black 1px; min-height: 200px; margin: 10px;">
+                <div id="testContainer"
+                     ondragover="dragOver(event)"
+                     ondrop="dragDrop(event)"
+                     ondragenter="dragEnter(event)"
+                     ondragleave="dragLeave(event)">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
