@@ -3,6 +3,7 @@
  */
 var ActivitiesController = function(view, model) {
 
+    // onDragStart:
     $('.activity').on('dragstart', this, function(event) {
 
         console.log('dragstart()');
@@ -10,7 +11,7 @@ var ActivitiesController = function(view, model) {
         var selectedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
             if (view.parkedActivitiesContainer.children()[i] == event.target) {
-               selectedActivityIndex = i;
+                selectedActivityIndex = i;
                 break;
             }
         }
@@ -24,6 +25,7 @@ var ActivitiesController = function(view, model) {
 
     });
 
+    // onDragEnd:
     $('.activity').on('dragend', this, function(event) {
         console.log('dragend()');
     });

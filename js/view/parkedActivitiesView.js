@@ -3,7 +3,6 @@
  */
 var ActivitiesView = function(container, model) {
 
-    this.container = container;
     this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
 
     // register an observer to the model
@@ -18,6 +17,7 @@ var ActivitiesView = function(container, model) {
         this.parkedActivitiesContainer.empty();
 
         // add all parked activities
+        console.log("#parkedActivites = " + model.parkedActivities.length);
         var activities = model.parkedActivities;
         for (var i = 0; i < activities.length; i++) {
             var activityDiv = $('<div>');
