@@ -1,8 +1,11 @@
 /**
  * Created by sandstroh on 3/5/14.
  */
-var meetingsController = function(view, model) {
+var MeetingsController = function(view, model) {
 
-    // TODO: on click action for 'add new day' button
+    view.addDayButton.click(function() {
+        console.log('adding day...');
+        model.addDay();
+    });
 
 }

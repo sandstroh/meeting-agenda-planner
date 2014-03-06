@@ -13,5 +13,6 @@ $(function() {
     var addNewActivityController = new AddNewActivityController(addNewActivityView, model);
 
     var meetingsView = new MeetingsView($('#meetingsView'), model);
+    var meetingsController = new MeetingsController(meetingsView, model);
 
 });

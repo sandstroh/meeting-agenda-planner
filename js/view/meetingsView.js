@@ -4,6 +4,9 @@
 var MeetingsView = function(container, model) {
 
     this.dayViewsContainer = container.find("#dayViewsContainer");
+    this.addDayButton = container.find('#addDayButton');
+
+    model.addObserver(this);
 
     this.update = function() {
 
