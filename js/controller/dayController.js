@@ -26,14 +26,22 @@ var DayController = function(view, model, day) {
 
     // onDrop:
     view.activitiesDiv.on('drop', this, function(event) {
+
         console.log('drop()');
+
         event.preventDefault();
         event.stopPropagation();
+
         event.target.classList.remove('over');
-        // TODO: retrieve activity from event and add it to the day
-        // TODO: in the model
-//        var data = event.originalEvent.dataTransfer.getData("Text");
-//        view.activitiesDiv.append(data);
+
+        var selectedActivityIndex = event.originalEvent.dataTransfer.getData("SelectedActivity");
+        console.log('selectedActivityIndex = ' + selectedActivityIndex);
+        var selectedActivity = model.parkedActivities[selectedActivityIndex];
+        day._addActivity(selectedActivity);
+
+        // TODO: this line is the problem!
+        model.removeParkedActivity(selectedActivityIndex);
+
     });
 
 }

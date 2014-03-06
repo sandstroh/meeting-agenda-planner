@@ -16,14 +16,17 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+
+            <!-- Parked Activities View -->
+            <div id="parkedActivitiesView" class="col-md-4">
                 <h4>Activities:</h4>
-                <div id="activitiesView" style="border: solid black 1px; min-height: 200px">
-                    <!--<div id="text1" draggable="true" ondragstart="drag(event)">Activity 1</div>-->
-                    <!--<div id="text2" draggable="true" ondragstart="drag(event)">Activity 2</div>-->
+                <div id="parkedActivitiesContainer">
+                    <!-- container for parked activities-->
                 </div>
                 <button class="btn" data-toggle="modal" data-target="#addNewActivityView">Add Activity</button>
             </div>
+
+            <!-- Meetings View -->
             <div id="meetingsView" class="col-md-8">
                 <h4>Meeting:</h4>
                 <div id="dayViewsContainer">
@@ -31,10 +34,11 @@
                 </div>
                 <button id="addDayButton" type="button">Add Day</button>
             </div>
+
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Add New Activity View -->
     <div class="modal fade" id="addNewActivityView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -84,11 +88,12 @@
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
+    <script src="js/util/timeFormatter.js"></script>
 
     <script src="js/model/meetingAgendaPlannerModel.js"></script>
 
-    <script src="js/view/activitiesView.js"></script>
-    <script src="js/controller/activitiesController.js"></script>
+    <script src="js/view/parkedActivitiesView.js"></script>
+    <script src="js/controller/parkedActivitiesController.js"></script>
 
     <script src="js/view/addNewActivityView.js"></script>
     <script src="js/controller/addNewActivityController.js"></script>
