@@ -1,0 +1,8 @@
+#addNewActivityView > .modal-dialog {
+    width: 350px;
+}   
+
+.addnewactivity-table td {
+    text-align: right;
+    padding: 5px;
+}
