@@ -16,6 +16,13 @@
     background-color: #184fff;
 }
 
+.activity > .length-span {
+    width: 60px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .table-view-custom{
     display:inline;
 }
