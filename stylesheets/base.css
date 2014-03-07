@@ -14,8 +14,3 @@
 .activitiesDiv.over {
     border: dashed red 2px;
 }
-
-.day-canvas {
-    width: 100px;
-    height: 150px;
-}

@@ -44,8 +44,9 @@ var DayView = function (container, model, day) {
         dayTable.append(trLength);
 
         // canvas
-        var canvas = $('<canvas>')
-        canvas.addClass('day-canvas');
+        var canvas = $('<canvas>');
+        canvas.attr('width', '70');
+        canvas.attr('height', '100');
         // we have to pass canvas.get(0) to the view because the created
         // canvas object is an jquery object and not a pure canvas element
         // see: http://stackoverflow.com/questions/5808162/getcontext-is-not-a-function
