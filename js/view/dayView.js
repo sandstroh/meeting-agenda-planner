@@ -3,6 +3,8 @@
  */
 var DayView = function (container, model, day) {
 
+//    model.addObserver(this);
+
     this.update = function () {
 
         var dayDiv = $('<div>');
@@ -50,8 +52,8 @@ var DayView = function (container, model, day) {
 
 
         // activities
-        var activitiesDiv = $('<div>');
-        activitiesDiv.attr('style', 'border: solid black 1px; min-height: 100px;');
+        this.activitiesDiv = $('<div>');
+        this.activitiesDiv.addClass('activitiesDiv');
 
         for (var i = 0; i < day.getActivities().length; i++) {
             var activityDiv = $('<div>');
@@ -73,17 +75,16 @@ var DayView = function (container, model, day) {
                 default:
                     console.log('Error: unknown activity type \'' + day.getActivities()[i].getTypeId() + '\'');
             }
-            activitiesDiv.append(activityDiv);
+            this.activitiesDiv.append(activityDiv);
             var trActivity = $("<tr>");
             var tdActivity = $("<td>");
-            tdActivity.append(activitiesDiv);
+            tdActivity.append(this.activitiesDiv);
             trActivity.append(tdActivity);
             dayTable.append(trActivity);
         }
 
         dayDiv.append(dayTable)
         dayDiv.append(canvas);
-        //dayDiv.append(activitiesDiv);
 
         container.append(dayDiv);
 

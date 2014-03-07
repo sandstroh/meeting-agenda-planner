@@ -6,7 +6,7 @@ $(function() {
     model.createTestData();
 
     // instantiate our views and controller
-    var activitiesView = new ActivitiesView($('#activitiesView'), model)
+    var activitiesView = new ActivitiesView($('#parkedActivitiesView'), model)
     var activitiesController = new ActivitiesController(activitiesView, model);
 
     var addNewActivityView = new AddNewActivityView($('#addNewActivityView'), model);

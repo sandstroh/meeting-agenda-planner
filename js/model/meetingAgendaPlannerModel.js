@@ -94,13 +94,13 @@ function Day(startH,startM) {
 	// the end time of the day
 	this.getEnd = function() {
 		var end = this._start + this.getTotalLength();
-		return Math.floor(end/60) + ":" + end % 60;
+        return formatTime(end, end);
 	};
 	
 	// returns the string representation Hours:Minutes of 
 	// the start time of the day
 	this.getStart = function() {
-		return Math.floor(this._start/60) + ":" + this._start % 60;
+        return formatTime(this._start, this._start);
 	};
 	
 	// returns the length (in minutes) of activities of certain type
@@ -213,8 +213,9 @@ function MeetingAgendaPlannerModel(){
 
     this.createTestData = function() {
 
-        this.addParkedActivity(new Activity("Test Activity", 15, 3, "Description..."));
+        this.addParkedActivity(new Activity("Test Activity", 15, 0, "Description..."));
         this.addParkedActivity(new Activity("Another Test Activity", 30, 2, "Description..."));
+        this.addParkedActivity(new Activity("A long Break", 120, 3, "blub"));
 
         this.addDay();
         this.addActivity(new Activity("Introduction", 10, 0, ""), 0);
