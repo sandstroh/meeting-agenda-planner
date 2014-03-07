@@ -14,5 +14,4 @@ $(function() {
 
     var meetingsView = new MeetingsView($('#meetingsView'), model);
     var meetingsController = new MeetingsController(meetingsView, model);
-
 });
