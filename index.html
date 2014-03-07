@@ -10,6 +10,7 @@
     <!-- Other stylesheets -->
     <link rel="stylesheet" href="stylesheets/base.css">
     <link rel="stylesheet" href="stylesheets/activities.css">
+    <link rel="stylesheet" href="stylesheets/addnewactivity.css">
 
 </head>
 <body>
@@ -47,19 +48,19 @@
                     <h4 class="modal-title" id="myModalLabel">Add New Activity...</h4>
                 </div>
                 <div class="modal-body">
-                    <table>
+                    <table class="addnewactivity-table">
                         <tr>
                             <td>Name:</td>
-                            <td><input id="activityName" type="text"/></td>
+                            <td><input id="activityName" type="text" class="form-control"/></td>
                         </tr>
                         <tr>
                             <td>Length:</td>
-                            <td><input id="activityLength" type="number" min="1" max="1440"/>min</td>
+                            <td><input id="activityLength" type="number" min="1" max="1440" class="form-control"/></td>
                         </tr>
                         <tr>
                             <td>Type:</td>
                             <td>
-                                <select id="activityType">
+                                <select id="activityType" class="form-control">
                                     <option value="0">Presentation</option>
                                     <option value="1">Group Work</option>
                                     <option value="2">Discussion</option>
@@ -69,7 +70,7 @@
                         </tr>
                         <tr>
                             <td>Description:</td>
-                            <td><input id="activityDescription" type="text"/></td>
+                            <td><input id="activityDescription" type="text" class="form-control"/></td>
                         </tr>
                     </table>
                 </div>

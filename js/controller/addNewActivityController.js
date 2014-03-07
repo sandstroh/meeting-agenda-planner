@@ -7,12 +7,18 @@ var AddNewActivityController = function(view, model) {
         resetView();
     });
 
-    view.okButton.click(function() {
-
-        // TODO: permit activities with empty name
+    view.okButton.click(function(event) {
 
         // get values for new activity
         var name = view.activityName.val();
+        // check that the name of the new activity isn't empty
+        if (name == '') {
+            event.preventDefault();
+            event.stopPropagation();
+            alert('Error: the name of an activity cannot be empty!');
+            return;
+
+        }
         var length = view.activityLength.val();
         var type = view.activityType.val();
         switch (type) {
