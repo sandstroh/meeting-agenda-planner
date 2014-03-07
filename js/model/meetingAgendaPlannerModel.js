@@ -213,9 +213,10 @@ function MeetingAgendaPlannerModel(){
 
     this.createTestData = function() {
 
-        this.addParkedActivity(new Activity("Test Activity", 15, 0, "Description..."));
-        this.addParkedActivity(new Activity("Another Test Activity", 30, 2, "Description..."));
+        this.addParkedActivity(new Activity("Test Presentation", 15, 0, "Description..."));
+        this.addParkedActivity(new Activity("Test Discussion", 30, 2, "Description..."));
         this.addParkedActivity(new Activity("A long Break", 120, 3, "blub"));
+        this.addParkedActivity(new Activity("Test Group Work", 20, 1, "blub"));
 
         this.addDay();
         this.addActivity(new Activity("Introduction", 10, 0, ""), 0);

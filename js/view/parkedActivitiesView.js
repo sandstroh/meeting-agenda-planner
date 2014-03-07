@@ -21,7 +21,15 @@ var ActivitiesView = function(container, model) {
         var activities = model.parkedActivities;
         for (var i = 0; i < activities.length; i++) {
             var activityDiv = $('<div>');
-            activityDiv.html(activities[i].getName());
+//            activityDiv.html(activities[i].getName());
+//            activityDiv.html(activities[i].getLength() + 'min');
+            var lengthSpan = $('<span>');
+            lengthSpan.html(activities[i].getLength() + 'min');
+            lengthSpan.addClass('length-span');
+            var nameDiv = $('<span>');
+            nameDiv.html(activities[i].getName());
+            activityDiv.append(lengthSpan);
+            activityDiv.append(nameDiv);
             activityDiv.addClass('activity');
             switch(activities[i].getTypeId()) {
                 case 0:
