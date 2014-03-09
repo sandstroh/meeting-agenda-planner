@@ -11,7 +11,7 @@ var MeetingsView = function(container, model) {
     this.dayViewsContainer = container.find("#dayViewsContainer");
     this.addDayButton = container.find('#addDayButton');
 
-    var halitTestView = new HalitTestView(container,model);
+//    var halitTestView = new HalitTestView(container,model);
 
     model.addObserver(this);
 

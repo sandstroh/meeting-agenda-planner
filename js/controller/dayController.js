@@ -24,6 +24,10 @@ var DayController = function(view, model, day) {
         event.target.classList.remove('over');
     });
 
+//    view.activitiesDiv.on('dragend', this, function(event) {
+//       console.log('dragend()');
+//    });
+
     // onDrop:
     view.activitiesDiv.on('drop', this, function(event) {
 
