@@ -78,12 +78,12 @@ var DayView = function (container, model, day) {
                     console.log('Error: unknown activity type \'' + day.getActivities()[i].getTypeId() + '\'');
             }
             this.activitiesDiv.append(activityDiv);
-            var trActivity = $("<tr>");
-            var tdActivity = $("<td>");
-            tdActivity.append(this.activitiesDiv);
-            trActivity.append(tdActivity);
-            dayTable.append(trActivity);
         }
+        var trActivity = $("<tr>");
+        var tdActivity = $("<td>");
+        tdActivity.append(this.activitiesDiv);
+        trActivity.append(tdActivity);
+        dayTable.append(trActivity);
 
         dayDiv.append(dayTable)
         dayDiv.append(canvas);
