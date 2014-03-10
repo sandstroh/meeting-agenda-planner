@@ -3,6 +3,8 @@
  */
 var CanvasView = function(canvas, model, day) {
 
+    model.addObserver(this);
+
     this.update = function() {
 
         var activities = day.getActivities();
