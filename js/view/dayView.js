@@ -77,6 +77,7 @@ var DayView = function (container, model, day) {
                 default:
                     console.log('Error: unknown activity type \'' + day.getActivities()[i].getTypeId() + '\'');
             }
+            activityDiv.attr('draggable', true);
             this.activitiesDiv.append(activityDiv);
         }
         var trActivity = $("<tr>");

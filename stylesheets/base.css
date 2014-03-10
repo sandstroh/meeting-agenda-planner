@@ -2,6 +2,9 @@
     border: solid black 1px;
     min-height: 200px;
 }
+#parkedActivitiesContainer.over {
+    border: dashed red 2px;
+}
 
 #dayViewsContainer {
     border: black solid 1px;

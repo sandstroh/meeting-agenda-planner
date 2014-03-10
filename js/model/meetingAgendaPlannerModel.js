@@ -187,29 +187,29 @@ function MeetingAgendaPlannerModel(){
 		this.notifyObservers();
 		return act;
 	};
-	
-	// moves activity between the days, or day and parked activities.
-	// to park activity you need to set the new day to null
-	// to move a parked activity to let's say day 0 you set oldday to null
-	// and new day to 0
-	this.moveActivity = function(oldday, oldposition, newday, newposition) {
-		if(oldday !== null && oldday == newday) {
-			this.days[oldday]._moveActivity(oldposition,newposition);
-		}else if(oldday == null && newday == null) {
-			var activity = this.removeParkedActivity(oldposition);
-			this.addParkedActivity(activity,newposition);
-		}else if(oldday == null) {
-			var activity = this.removeParkedActivity(oldposition);
-			this.days[newday]._addActivity(activity,newposition);
-		}else if(newday == null) {
-			var activity = this.days[oldday]._removeActivity(oldposition);
-			this.addParkedActivity(activity);
-		} else {
-			var activity = this.days[oldday]._removeActivity(oldposition);
-			this.days[newday]._addActivity(activity,newposition);
-		}
-		this.notifyObservers();
-	};
+
+    // moves activity between the days, or day and parked activities.
+    // to park activity you need to set the new day to null
+    // to move a parked activity to let's say day 0 you set oldday to null
+    // and new day to 0
+    this.moveActivity = function(oldday, oldposition, newday, newposition) {
+        if(oldday !== null && oldday == newday) {
+            this.days[oldday]._moveActivity(oldposition,newposition);
+        }else if(oldday == null && newday == null) {
+            var activity = this.removeParkedActivity(oldposition);
+            this.addParkedActivity(activity,newposition);
+        }else if(oldday == null) {
+            var activity = this.removeParkedActivity(oldposition);
+            this.days[newday]._addActivity(activity,newposition);
+        }else if(newday == null) {
+            var activity = this.days[oldday]._removeActivity(oldposition);
+            this.addParkedActivity(activity);
+        } else {
+            var activity = this.days[oldday]._removeActivity(oldposition);
+            this.days[newday]._addActivity(activity,newposition);
+        }
+        this.notifyObservers();
+    };
 
     this.createTestData = function() {
 
@@ -225,8 +225,8 @@ function MeetingAgendaPlannerModel(){
 //        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
 //        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
 
-        this.addDay();
-        this.addActivity(new Activity("Presentation", 30, 0, ""), 1);
+//        this.addDay();
+//        this.addActivity(new Activity("Presentation", 30, 0, ""), 1);
 
     };
 	

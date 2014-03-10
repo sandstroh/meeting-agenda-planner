@@ -5,6 +5,8 @@ var ActivitiesView = function(container, model) {
 
     this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
 
+    this.addNewActivityButton = container.find('#addActivityButton');
+
     // register an observer to the model
     model.addObserver(this);
 
