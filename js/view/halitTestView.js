@@ -1,109 +1,85 @@
-/*
-<div id="menu" style="float:left;">
-    Start Time <span id="startTime"> <input type="text" value="08:00"></span> <br>
-    End Time <span id="endTime">10:00</span><br>
-    Total Time <span id="totalLength">120 min</span>
-    </div>
-
-    <div id="canvasContainer">
-    <canvas id="myCanvas" width="70" height="100"
-    style="border:1px solid #000000;">
-    </canvas>
-    </div>
-
-    <div id="tableContainer" style="width:300px;">
-    <table class="table" style="height:500px;border:dashed gray;">
-
-    <tr>
-    <td>08:00</td>
-    <td>Introduction</td>
-    </tr>
-
-    </table>
-    </div>
-
-    <div id="dayViewsContainer" style="border: black solid 1px;" class="table-view-custom">
-    </div>
-
-        <ul style="list-style-type: none;">
-                        <li>Start Time <span id="startTime"> <input type="text" value="08:00"></span></li>
-                        <li>End Time</li>
-                        <li>Total Time</li>
-                    </ul>
-*/
 var HalitTestView = function(container,model)
 {
-    this.mainDiv = container.find("#overallDayContainer");
-    window.alert("breaking the habit");
+    model.addObserver(this);
+    this.update = function()
+    {
+        this.mainDiv = container.find("#overallDayContainer");
+        this.addButton = container.find("#wiener");
 
-    var div = $("<div>");
-    div.attr("id","timeMenu");
-    div.attr("style","float:left;");
+        this.contain = container;
 
-    var listTag = $("<ul>");
-    listTag.attr("style","list-style-type: none;");
+        var div = $("<div>");
+        div.attr("id","timeMenu");
+        div.attr("style","height:150px;width:250px;float:left;");
 
-    var startTimeTag = $("<li>");
-    startTimeTag.html("Start Time");
-    var startSpan = $("<span>");
-    startSpan.attr("id","startActivityTime");
+        var startDiv = $("<div>");
+        startDiv.html("Start Time");
 
-    var textArea = $("<input>");
-    textArea.attr("type","text");
-    textArea.attr("value","08:00");
-    startSpan.append(textArea);
+        var startSpan = $("<span>");
+        startSpan.attr("id","startActivityTime");
+        var textArea = $("<input>");
+        textArea.attr("type","text");
+        textArea.attr("value","08:00");
 
-    startTimeTag.append(startSpan);
+        startSpan.append(textArea);
+        startDiv.append(startSpan);
 
-    var endTimeTag = $("<li>");
-    endTimeTag.html("End Time");
-    var endSpan = $("<span>");
-    endSpan.attr("id","endActivityTime");
-    endTimeTag.append(endSpan);
 
-    var totalTimeTag = $("<li>");
-    totalTimeTag.html("Total Time");
-    var totalSpan = $("<span>");
-    totalSpan.attr("id","totalActivityTime");
-    totalTimeTag.append(totalSpan);
+        var endDiv = $("<div>");
+        endDiv.html("End Time");
+        var endSpan = $("<span>");
+        endSpan.attr("id","endActivityTime");
 
-    listTag.append(startTimeTag);
-    listTag.append(endTimeTag);
-    listTag.append(totalTimeTag);
+        endDiv.append(endSpan);
+        div.append(endDiv);
 
-    var canvasDiv = $("<div>");
-    canvasDiv.attr("id","canvasContainer");
+        var totalDiv = $("<div>");
+        totalDiv.html("Total Time");
+        var totalSpan = $("<span>");
+        totalSpan.attr("id","totalActivityTime");
+        totalDiv.append(totalSpan);
 
-    var canvasElement = $("<canvas>");
-    canvasElement.attr("id","activityTimeGraph");
-    canvasElement.attr("width","70");
-    canvasElement.attr("height","100");
-    canvasElement.attr("style","border:1px solid #000000;");
-    canvasDiv.append(canvasElement);
+        div.append(startDiv);
+        div.append(endDiv);
+        div.append(totalDiv);
 
-    var tableDiv = $("<div>");
-    tableDiv.attr("id","tableContainer");
-    tableDiv.attr("style","width:300px;");
+        var canvasDiv = $("<div>");
+        canvasDiv.attr("id","canvasContainer");
+        canvasDiv.attr("style","float:left;");
 
-    var tableTag = $("<table>");
-    tableTag.addClass("table");
-    tableTag.attr("id","activityTable");
-    tableTag.attr("style","height:500px;border:dashed gray;");
+        var canvasElement = $("<canvas>");
+        canvasElement.attr("id","activityTimeGraph");
+        canvasElement.attr("width","70");
+        canvasElement.attr("height","100");
+        canvasElement.attr("style","border:1px solid #000000;");
+        canvasDiv.append(canvasElement);
 
-    //1 tr 2 td
-    var trTag = $("<tr>");
-    var timeRow = $("<td>");
-    timeRow.html("08:00");
-    var nameRow = $("<td>");
-    nameRow.html("dark side");
-    trTag.append(timeRow);
-    trTag.append(nameRow);
+        var tableDiv = $("<div>");
+        tableDiv.attr("id","tableContainer");
+        tableDiv.attr("style","width:250px;");
 
-    tableTag.append(trTag);
-    tableDiv.append(tableTag);
-    div.append(listTag);
+        var tableTag = $("<table>");
+        tableTag.addClass("table");
+        tableTag.attr("id","activityTable");
+        tableTag.attr("style","width:320px;height:500px;border:dashed gray;");
 
-    this.mainDiv.append(div);
-    this.mainDiv.append(canvasDiv);
-    this.mainDiv.append(tableDiv);
+        //1 tr 2 td
+        var trTag = $("<tr>");
+        var timeRow = $("<td>");
+        timeRow.html("08:00");
+        var nameRow = $("<td>");
+        nameRow.html("dark side");
+        trTag.append(timeRow);
+        trTag.append(nameRow);
+
+        tableTag.append(trTag);
+        tableDiv.append(tableTag);
+
+        this.mainDiv.append(div);
+        this.mainDiv.append(canvasDiv);
+        this.mainDiv.append(tableDiv);
+
+        window.alert("breaking the habit");
+    }
+    this.update();
 }

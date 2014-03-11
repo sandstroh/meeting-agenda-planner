@@ -12,6 +12,7 @@ var MeetingsView = function(container, model) {
     this.addDayButton = container.find('#addDayButton');
 
     var halitTestView = new HalitTestView(container,model);
+    var halitController = new HalitTestController(halitTestView,model);
 
     model.addObserver(this);
 
