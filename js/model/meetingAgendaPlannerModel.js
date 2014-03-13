@@ -176,8 +176,12 @@ function MeetingAgendaPlannerModel(){
 	};
 	
 	// add an activity to parked activities
-	this.addParkedActivity = function(activity){
-		this.parkedActivities.push(activity);
+	this.addParkedActivity = function(activity, position){
+        if (position == null) {
+		    this.parkedActivities.push(activity);
+        } else {
+            this.parkedActivities.splice(position, 0, activity);
+        }
 		this.notifyObservers();
 	};
 	
@@ -188,16 +192,34 @@ function MeetingAgendaPlannerModel(){
 		return act;
 	};
 
+    // added:
+    // remove an activity on provided position from parked activites
+    // without notifying observers
+    this._removeParkedActivity = function(position) {
+        act = this.parkedActivities.splice(position,1)[0];
+        return act;
+    };
+
     // moves activity between the days, or day and parked activities.
     // to park activity you need to set the new day to null
     // to move a parked activity to let's say day 0 you set oldday to null
     // and new day to 0
     this.moveActivity = function(oldday, oldposition, newday, newposition) {
+        // added: check if we don't have to move the activity
+        if (oldday == newday && oldposition == newposition) {
+            // nothing to do here...
+            return;
+        }
         if(oldday !== null && oldday == newday) {
             this.days[oldday]._moveActivity(oldposition,newposition);
         }else if(oldday == null && newday == null) {
-            var activity = this.removeParkedActivity(oldposition);
-            this.addParkedActivity(activity,newposition);
+            // fixed: it's now possible to add an activity at a specific position
+            var activity = this._removeParkedActivity(oldposition);
+            if (oldposition > newposition) {
+                this.addParkedActivity(activity,newposition);
+            } else {
+                this.addParkedActivity(activity,newposition-1);
+            }
         }else if(oldday == null) {
             var activity = this.removeParkedActivity(oldposition);
             this.days[newday]._addActivity(activity,newposition);
