@@ -1,9 +1,10 @@
 /**
  * Created by sandstroh on 3/3/14.
  */
-var ActivityDialogView = function(container, model, activity) {
+var ActivityDialogView = function(container, model, activity, activityIndex) {
 
     this.activity = activity;
+    this.activityIndex = activityIndex;
 
     this.activityDialogLabel = container.find('#activityDialogLabel');
 
@@ -15,24 +16,16 @@ var ActivityDialogView = function(container, model, activity) {
     this.okButton = container.find("#addNewActivityButton");
     this.cancelButton = container.find("#cancelAddingNewActivityButton");
 
-    // default value for activity length
-    this.activityLength.val("1");
-
     if (activity == null) {
-        this.activityDialogLabel = 'Add New Activity:';
+        this.activityDialogLabel.html('Add New Activity:');
+        this.okButton.html('Add Activity');
     } else {
-        this.activityDialogLabel = 'Edit Activity:';
-        this.activityName = activity.getName();
-        this.activityLength = activity.getLength();
-        this.activityType = activity.getTypeId();
-        this.activityDescription = activity.getDescription();
-    }
-
-    this.resetView = function() {
-        this.activityName.val("");
-        this.activityLength.val("1");
-        this.activityType.val("0");
-        this.activityDescription.val("");
+        this.activityDialogLabel.html('Edit Activity:');
+        this.activityName.val(activity.getName());
+        this.activityLength.val(activity.getLength());
+        this.activityType.val(activity.getTypeId());
+        this.activityDescription.val(activity.getDescription());
+        this.okButton.html('Edit Activity');
     }
 
 }

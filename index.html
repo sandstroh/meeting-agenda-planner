@@ -10,7 +10,7 @@
     <!-- Other stylesheets -->
     <link rel="stylesheet" href="stylesheets/base.css">
     <link rel="stylesheet" href="stylesheets/activities.css">
-    <link rel="stylesheet" href="stylesheets/addnewactivity.css">
+    <link rel="stylesheet" href="stylesheets/activity-dialog.css">
 
 </head>
 <body>
@@ -41,55 +41,7 @@
         </div>
     </div>
 
-    <!--&lt;!&ndash; Add New Activity View &ndash;&gt;-->
-    <!--<div class="modal fade" id="addNewActivityView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-        <!--<div class="modal-dialog">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-                    <!--<h4 class="modal-title" id="myModalLabel">Add New Activity...</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--<table class="addnewactivity-table">-->
-                        <!--<tr>-->
-                            <!--<td>Name:</td>-->
-                            <!--<td><input id="activityName" type="text" class="form-control"/></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Length:</td>-->
-                            <!--<td><input id="activityLength" type="number" min="1" max="1440" class="form-control"/></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Type:</td>-->
-                            <!--<td>-->
-                                <!--<select id="activityType" class="form-control">-->
-                                    <!--<option value="0">Presentation</option>-->
-                                    <!--<option value="1">Group Work</option>-->
-                                    <!--<option value="2">Discussion</option>-->
-                                    <!--<option value="3">Break</option>-->
-                                <!--</select>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Description:</td>-->
-                            <!--<td><input id="activityDescription" type="text" class="form-control"/></td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button id="cancelAddingNewActivityButton" type="button"-->
-                            <!--class="btn btn-default" data-dismiss="modal">Cancel</button>-->
-                    <!--<button id="addNewActivityButton" type="button"-->
-                            <!--class="btn btn-primary" data-dismiss="modal">Add Activity</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
-
-
-    <!-- Add New Activity View -->
+    <!-- Activity Dialog View -->
     <div class="modal fade" id="activityDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -98,7 +50,7 @@
                     <h4 class="modal-title" id="activityDialogLabel">Add New Activity...</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="addnewactivity-table">
+                    <table class="activitydialog-table">
                         <tr>
                             <td>Name:</td>
                             <td><input id="activityName" type="text" class="form-control"/></td>
@@ -145,9 +97,6 @@
 
     <script src="js/view/parkedActivitiesView.js"></script>
     <script src="js/controller/parkedActivitiesController.js"></script>
-
-    <script src="js/view/addNewActivityView.js"></script>
-    <script src="js/controller/addNewActivityController.js"></script>
 
     <script src="js/view/activityDialogView.js"></script>
     <script src="js/controller/activityDialogController.js"></script>
