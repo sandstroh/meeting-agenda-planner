@@ -23,11 +23,18 @@
     background-color: #184fff;
 }
 
-.activity > .length-span {
-    width: 60px;
-    text-align: right;
-    display: inline-block;
-    margin-right: 10px;
+/*.activity > .length-span {*/
+    /*width: 60px;*/
+    /*text-align: right;*/
+    /*display: inline-block;*/
+    /*margin-right: 10px;*/
+/*}*/
+
+.activity > .glyphicon-remove {
+    visibility: hidden;
+}
+.activity.over > .glyphicon-remove {
+    visibility: visible;
 }
 
 .table-view-custom{

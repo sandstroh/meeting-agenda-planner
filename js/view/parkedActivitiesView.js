@@ -1,7 +1,9 @@
 /**
  * Created by sandstroh on 3/2/14.
  */
-var ActivitiesView = function(container, model) {
+var ParkedActivitiesView = function(container, model) {
+
+    this.container = container;
 
     this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
 
@@ -23,15 +25,27 @@ var ActivitiesView = function(container, model) {
         var activities = model.parkedActivities;
         for (var i = 0; i < activities.length; i++) {
             var activityDiv = $('<div>');
+            activityDiv.addClass('row');
+
 //            activityDiv.html(activities[i].getName());
 //            activityDiv.html(activities[i].getLength() + 'min');
+
             var lengthSpan = $('<span>');
             lengthSpan.html(activities[i].getLength() + 'min');
-            lengthSpan.addClass('length-span');
-            var nameDiv = $('<span>');
-            nameDiv.html(activities[i].getName());
+            lengthSpan.addClass('col-md-3');
+//            lengthSpan.addClass('length-span');
+            var nameSpan = $('<span>');
+            nameSpan.html(activities[i].getName());
+            nameSpan.addClass('col-md-7');
+
+            var deleteSpan = $('<span>');
+            deleteSpan.addClass('col-md-1');
+            deleteSpan.addClass('glyphicon');
+            deleteSpan.addClass('glyphicon-remove');
+
             activityDiv.append(lengthSpan);
-            activityDiv.append(nameDiv);
+            activityDiv.append(nameSpan);
+            activityDiv.append(deleteSpan);
             activityDiv.addClass('activity');
             switch(activities[i].getTypeId()) {
                 case 0:
@@ -48,6 +62,21 @@ var ActivitiesView = function(container, model) {
             activityDiv.attr('draggable', true);
             this.parkedActivitiesContainer.append(activityDiv);
         }
+
+        /**
+         * Why do we create the controller for this view here and update it on each model update?
+         *
+         * Short: Otherwise it wouldn't work.
+         *
+         * More detailed: Let's take a look at the delete 'X' of each activity that appears if you
+         * are with the mouse over an activity. When you click on it, the parked activity gets deleted
+         * and the model gets updated. It's now one element less. But the controller isn't updated and
+         * a lot of its functionality simply doesn't work anymore. We cannot explain why exactly this is
+         * the case, but the problem seems to be, that at the very end of a click event other events are
+         * triggered. But when the model gets updated and the element on which you clicked doesn't exist
+         * anymore, these events cannot be triggered and the leads to some problems.
+         */
+        var parkedActivitiesController = new ParkedActivitiesController(this, model);
 
     }
 
