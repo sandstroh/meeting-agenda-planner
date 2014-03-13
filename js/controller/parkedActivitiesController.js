@@ -115,4 +115,40 @@ var ActivitiesController = function(view, model) {
 
     });
 
+
+
+    // onDrop:
+    $('.activity').on('drop', this, function(event) {
+
+        console.log('drop on activity');
+
+        event.preventDefault();
+        event.stopPropagation();
+
+//        console.log(event);
+
+        var droppedActivityIndex = -1;
+        for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
+            if (view.parkedActivitiesContainer.children()[i] == event.target) {
+                droppedActivityIndex = i;
+                break;
+            }
+        }
+
+        if (droppedActivityIndex == -1) {
+            console.log('Error: selected activity not found');
+            return;
+        }
+
+        var selectedActivityIndex = event.originalEvent.dataTransfer.getData('SelectedActivity');
+
+        console.log('from: ' + selectedActivityIndex);
+        console.log('to: ' + droppedActivityIndex);
+
+//        // TODO: determine newposition of the activity
+//        // add the activity at the end of the day
+        model.moveActivity(null, selectedActivityIndex, null, droppedActivityIndex);
+
+    });
+
 }

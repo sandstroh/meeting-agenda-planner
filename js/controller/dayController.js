@@ -39,9 +39,44 @@ var DayController = function(view, model, day) {
     // onDragOver: we need to catch this event and stop the propagation
     // otherwise the 'drop' event won't be fired
     view.activitiesDiv.on('dragover', this, function(event) {
+        console.log('dragover');
         event.preventDefault();
         event.stopPropagation();
     });
+
+//    $('.activity').on('dragover', this, function(event) {
+//
+//        console.log('drag over activity');
+//
+//        var mouse_y = event.originalEvent.y;
+//
+//        var target_y = $(event.target).position().top;
+//        var target_height = $(event.target).height();
+//
+////        console.log('mouse_y = ' + mouse_y);
+////        console.log('target_y = ' + target_y);
+////        console.log('target_h = ' + target_height);
+//
+//        if (mouse_y - 10 < (target_y + target_height / 2)) {
+//            event.target.classList.add('dropOverTop');
+//            event.target.classList.remove('dragOverBottom');
+//        } else {
+//            event.target.classList.add('dropOverBottom');
+//            event.target.classList.remove('dragOverTop');
+//        }
+//
+//    });
+
+//    $('.activity').on('dragenter', this, function(event) {
+//        console.log(event);
+//
+//    });
+
+//    $('.activity').on('dragleave', this, function(event) {
+//        console.log('drag leave activity');
+//        event.target.classList.remove('dragOverTop');
+//        event.target.classList.remove('dragOverBottom');
+//    });
 
     // onDragEnter:
     view.activitiesDiv.on('dragenter', this, function(event) {
@@ -70,6 +105,8 @@ var DayController = function(view, model, day) {
         event.stopPropagation();
 
         event.target.classList.remove('over');
+
+        console.log(event);
 
         var selectedActivityIndex = event.originalEvent.dataTransfer.getData("SelectedActivity");
         var from = event.originalEvent.dataTransfer.getData("From");

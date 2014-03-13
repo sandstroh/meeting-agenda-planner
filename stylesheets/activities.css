@@ -3,6 +3,13 @@
     padding: 5px;
 }
 
+.activity.dropOverTop {
+    margin-top: 40px;
+}
+.activity.dropOverBottom {
+    margin-bottom: 40px;
+}
+
 .activity-presentation {
     background-color: #ff2d23;
 }
