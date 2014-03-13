@@ -9,9 +9,7 @@ $(function() {
     var parkedActivitiesView = new ParkedActivitiesView($('#parkedActivitiesView'), model)
 //    var parkedActivitiesController = new ParkedActivitiesController(parkedActivitiesView, model);
 
-//    var addNewActivityView = new AddNewActivityView($('#addNewActivityView'), model);
-//    var addNewActivityController = new AddNewActivityController(addNewActivityView, model);
-
     var meetingsView = new MeetingsView($('#meetingsView'), model);
     var meetingsController = new MeetingsController(meetingsView, model);
+
 });

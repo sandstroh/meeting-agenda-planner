@@ -7,17 +7,21 @@ var ParkedActivitiesController = function(view, model) {
      * Show an 'Add New Activity' dialog after a click on the 'Add New Activity' button.
      */
     view.addNewActivityButton.click(function(event) {
-        console.log('Add new activity...');
-        // TODO: show ;add new activity' dialog
+        var activityDialogView = new ActivityDialogView($('#activityDialog'), model);
+        var activityDialogController = new ActivityDialogController(activityDialogView, model);
+        $('#activityDialog').modal('show');
     });
 
+    /**
+     * Display the 'X' for delete an activity.
+     */
     $(view.container).find('.activity').on('mouseenter', this, function(event) {
-        console.log('onmouseenter');
         event.target.classList.add('over');
     });
-
+    /**
+     * Hide the 'X' for delete an activity.
+     */
     $(view.container).find('.activity').on('mouseleave', this, function(event) {
-        console.log('onmouseleave');
         event.target.classList.remove('over');
     });
 
@@ -49,8 +53,42 @@ var ParkedActivitiesController = function(view, model) {
      * Show an 'Edit Activity' dialog, after a double-click on an activity.
      */
     $(view.container).find('.activity').on('dblclick', this, function(event) {
-        console.log('doubleclick');
-        // TODO: show 'edit activity' dialog
+
+        // TODO: same dirty hack as below...
+        // hide the 'X' for delete an activity
+        event.target.classList.remove('over');
+        event.target.parentNode.classList.remove('over');
+
+        // determine the index of the activity
+        var selectedActivityIndex = -1;
+        for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
+            if (view.parkedActivitiesContainer.children()[i] == event.target) {
+                selectedActivityIndex = i;
+                break;
+            }
+        }
+        // TODO: fix this dirty hack
+        //       the controller listens to double clicks of both the div and its children (spans)
+        //       so if we can't determine the selected activity, maybe the double click was on a span
+        if (selectedActivityIndex == -1) {
+            var parent = event.target.parentNode;
+            for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
+                if (view.parkedActivitiesContainer.children()[i] == parent) {
+                    selectedActivityIndex = i;
+                    break;
+                }
+            }
+        }
+        if (selectedActivityIndex == -1) {
+            console.log('Error: selected activity not found');
+            return;
+        }
+        var selectedActivity = model.parkedActivities[selectedActivityIndex];
+
+        var activityDialogView = new ActivityDialogView($('#activityDialog'), model, selectedActivity);
+        var activityDialogController = new ActivityDialogController(activityDialogView, model);
+        $('#activityDialog').modal('show');
+
     });
 
     // onDragStart

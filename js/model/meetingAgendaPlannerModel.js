@@ -184,6 +184,16 @@ function MeetingAgendaPlannerModel(){
         }
 		this.notifyObservers();
 	};
+
+    // edit a parked activity
+    this.editParkedActivity = function(oldActivity, editedActivity) {
+        for (var i = 0; i < this.parkedActivities.length; i++) {
+            if (this.parkedActivities[i] == oldActivity) {
+                this.parkedActivities[i] = editedActivity;
+            }
+        }
+        this.notifyObservers();
+    }
 	
 	// remove an activity on provided position from parked activites 
 	this.removeParkedActivity = function(position) {
