@@ -18,6 +18,10 @@ var ActivityDialogView = function(container, model, activity, activityIndex) {
 
     if (activity == null) {
         this.activityDialogLabel.html('Add New Activity:');
+        this.activityName.val("");
+        this.activityLength.val(1);
+        this.activityType.val(0);
+        this.activityDescription.val("");
         this.okButton.html('Add Activity');
     } else {
         this.activityDialogLabel.html('Edit Activity:');
