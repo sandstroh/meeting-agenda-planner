@@ -173,8 +173,13 @@ var ParkedActivitiesController = function(view, model) {
         event.preventDefault();
         event.stopPropagation();
 
-//        console.log(event);
+        // TODO: same dirty hack as below...
+        // hide the 'X' for delete an activity
+        event.target.classList.remove('over');
+        event.target.parentNode.classList.remove('over');
 
+        // TODO: fix this dirty hack (same as above)
+        // determine the index of the activity
         var droppedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
             if (view.parkedActivitiesContainer.children()[i] == event.target) {
@@ -182,7 +187,15 @@ var ParkedActivitiesController = function(view, model) {
                 break;
             }
         }
-
+        if (droppedActivityIndex == -1) {
+            var parent = event.target.parentNode;
+            for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
+                if (view.parkedActivitiesContainer.children()[i] == parent) {
+                    droppedActivityIndex = i;
+                    break;
+                }
+            }
+        }
         if (droppedActivityIndex == -1) {
             console.log('Error: selected activity not found');
             return;
