@@ -70,6 +70,13 @@ var ParkedActivitiesView = function(container, model) {
 
             // add the activity div to the wrapper div and add it to the overall activity container
             activityWrapperDiv.append(activityDiv);
+
+            // add a tooltip to the activity with its description
+            activityWrapperDiv.tooltip({
+                title: 'Description: ' + activities[i].getDescription(),
+                placement:  'bottom'
+            });
+
             this.parkedActivitiesContainer.append(activityWrapperDiv);
 
         }
