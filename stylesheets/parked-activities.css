@@ -1,0 +1,28 @@
+#parkedActivitiesContainer {
+    border: solid black 1px;
+    min-height: 200px;
+}
+#parkedActivitiesContainer.dragOver {
+    border: dashed red 1px;
+}
+
+.parked-activity-wrapper {
+    margin: 5px;
+}
+.parked-activity-wrapper.dragOver:before {
+    content: '';
+    display: block;
+    height: 30px;
+}
+
+.parked-activity {
+    margin: 0px;
+    padding: 5px;
+}
+
+.parked-activity-wrapper > div > .glyphicon-remove {
+    visibility: hidden;
+}
+.parked-activity-wrapper.mouseOver > div > .glyphicon-remove {
+    visibility: visible;
+}

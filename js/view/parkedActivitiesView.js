@@ -4,9 +4,7 @@
 var ParkedActivitiesView = function(container, model) {
 
     this.container = container;
-
     this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
-
     this.addNewActivityButton = container.find('#addActivityButton');
 
     // register an observer to the model
@@ -15,7 +13,7 @@ var ParkedActivitiesView = function(container, model) {
     // this function gets called when there is a change at the model
     this.update = function() {
 
-        console.log('activitiesView.update()');
+        console.log('parkedActivitiesView.update()');
 
         // reset parked activities container (delete all previous parked activities)
         this.parkedActivitiesContainer.empty();
@@ -24,29 +22,39 @@ var ParkedActivitiesView = function(container, model) {
         console.log("#parkedActivites = " + model.parkedActivities.length);
         var activities = model.parkedActivities;
         for (var i = 0; i < activities.length; i++) {
+
+            // activity wrapper div
+            var activityWrapperDiv = $('<div>');
+            activityWrapperDiv.addClass('parked-activity-wrapper');
+
+            // activity div
             var activityDiv = $('<div>');
             activityDiv.addClass('row');
+            activityDiv.addClass('parked-activity');
+            activityDiv.attr('draggable', true);
 
-//            activityDiv.html(activities[i].getName());
-//            activityDiv.html(activities[i].getLength() + 'min');
-
+            // activity length
             var lengthSpan = $('<span>');
             lengthSpan.html(activities[i].getLength() + 'min');
             lengthSpan.addClass('col-md-3');
-//            lengthSpan.addClass('length-span');
+
+            // activity name
             var nameSpan = $('<span>');
             nameSpan.html(activities[i].getName());
             nameSpan.addClass('col-md-7');
 
+            // activity delete X
             var deleteSpan = $('<span>');
             deleteSpan.addClass('col-md-1');
             deleteSpan.addClass('glyphicon');
             deleteSpan.addClass('glyphicon-remove');
 
+            // append activity spans to activity div
             activityDiv.append(lengthSpan);
             activityDiv.append(nameSpan);
             activityDiv.append(deleteSpan);
-            activityDiv.addClass('activity');
+
+            // add activity type class to activity div
             switch(activities[i].getTypeId()) {
                 case 0:
                     activityDiv.addClass('activity-presentation'); break;
@@ -59,8 +67,11 @@ var ParkedActivitiesView = function(container, model) {
                 default:
                     console.log('Error: unknown activity type \'' + activities[i].getTypeId() + '\'');
             }
-            activityDiv.attr('draggable', true);
-            this.parkedActivitiesContainer.append(activityDiv);
+
+            // add the activity div to the wrapper div and add it to the overall activity container
+            activityWrapperDiv.append(activityDiv);
+            this.parkedActivitiesContainer.append(activityWrapperDiv);
+
         }
 
         /**

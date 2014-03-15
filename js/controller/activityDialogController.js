@@ -3,8 +3,10 @@
  */
 var ActivityDialogController = function(view, model) {
 
+    var done = false;
+
     view.cancelButton.click(function() {
-        view.resetView();
+        view.activity = null;
     });
 
     view.okButton.click(function(event) {
@@ -59,6 +61,7 @@ var ActivityDialogController = function(view, model) {
         if (name == '') {
             event.preventDefault();
             event.stopPropagation();
+            // TODO: don't show an alert. display a warning/error! that disappers when name != ''
             alert('Error: the name of an activity cannot be empty!');
             return;
 
