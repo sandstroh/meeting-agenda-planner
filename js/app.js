@@ -6,8 +6,8 @@ $(function() {
     model.createTestData();
 
     // instantiate our views and controller
-    var parkedActivitiesView = new ParkedActivitiesView($('#parkedActivitiesView'), model)
-//    var parkedActivitiesController = new ParkedActivitiesController(parkedActivitiesView, model);
+
+    var parkedActivitiesView = new ParkedActivitiesView($('#parkedActivitiesView'), model);
 
     var meetingsView = new MeetingsView($('#meetingsView'), model);
     var meetingsController = new MeetingsController(meetingsView, model);

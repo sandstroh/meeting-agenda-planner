@@ -6,23 +6,32 @@ var ParkedActivitiesController = function(view, model) {
     /**
      * Show an 'Add New Activity' dialog after a click on the 'Add New Activity' button.
      */
-    view.addNewActivityButton.click(function(event) {
+    view.addNewActivityButton.on('click', this, function(event) {
         var activityDialogView = new ActivityDialogView($('#activityDialog'), model);
         var activityDialogController = new ActivityDialogController(activityDialogView, model);
         $('#activityDialog').modal('show');
     });
 
+
     /**
      * Display the 'X' for delete an activity.
      */
-    $(view.container).find('.activity').on('mouseenter', this, function(event) {
-        event.target.classList.add('over');
+    $(view.container).find('.parked-activity-wrapper').on('mouseenter', this, function(event) {
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
+        target.classList.add('mouseOver');
     });
     /**
      * Hide the 'X' for delete an activity.
      */
-    $(view.container).find('.activity').on('mouseleave', this, function(event) {
-        event.target.classList.remove('over');
+    $(view.container).find('.parked-activity-wrapper').on('mouseleave', this, function(event) {
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
+        target.classList.remove('mouseOver');
     });
 
     /**
@@ -30,12 +39,15 @@ var ParkedActivitiesController = function(view, model) {
      */
     $(view.container).find('.glyphicon-remove').on('click', this, function(event) {
 
-        var parent = event.target.parentNode;
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
 
         // determine the index of the activity
         var selectedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
-            if (view.parkedActivitiesContainer.children()[i] == parent) {
+            if (view.parkedActivitiesContainer.children()[i] == target) {
                 selectedActivityIndex = i;
                 break;
             }
@@ -49,34 +61,26 @@ var ParkedActivitiesController = function(view, model) {
 
     });
 
+
     /**
      * Show an 'Edit Activity' dialog, after a double-click on an activity.
      */
-    $(view.container).find('.activity').on('dblclick', this, function(event) {
+    $(view.container).find('.parked-activity-wrapper').on('dblclick', this, function(event) {
 
-        // TODO: same dirty hack as below...
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
+
         // hide the 'X' for delete an activity
-        event.target.classList.remove('over');
-        event.target.parentNode.classList.remove('over');
+        target.classList.remove('mouseOver');
 
         // determine the index of the activity
         var selectedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
-            if (view.parkedActivitiesContainer.children()[i] == event.target) {
+            if (view.parkedActivitiesContainer.children()[i] == target) {
                 selectedActivityIndex = i;
                 break;
-            }
-        }
-        // TODO: fix this dirty hack
-        //       the controller listens to double clicks of both the div and its children (spans)
-        //       so if we can't determine the selected activity, maybe the double click was on a span
-        if (selectedActivityIndex == -1) {
-            var parent = event.target.parentNode;
-            for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
-                if (view.parkedActivitiesContainer.children()[i] == parent) {
-                    selectedActivityIndex = i;
-                    break;
-                }
             }
         }
         if (selectedActivityIndex == -1) {
@@ -91,65 +95,80 @@ var ParkedActivitiesController = function(view, model) {
 
     });
 
-    // onDragStart
-    view.parkedActivitiesContainer.on('dragstart', this, function(event) {
 
-        console.log('dragstart');
+    /**
+     * onDragStart: Add the index of the selected activity that is dragged to the
+     * event such that it can later be read again. Also mark that the activity is
+     * dragged from the parked activities.
+     */
+    $(view.container).find('.parked-activity-wrapper').on('dragstart', this, function(event) {
+
+        console.log('dragstart: parked-wrapper');
+
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
+
+        target.parentNode.classList.add('dragOver');
 
         var selectedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
-            if (view.parkedActivitiesContainer.children()[i] == event.target) {
+            if (view.parkedActivitiesContainer.children()[i] == target) {
                 selectedActivityIndex = i;
                 break;
             }
         }
-
         if (selectedActivityIndex == -1) {
             console.log('Error: selected activity not found');
             return;
         }
-        var selectedActivity = model.parkedActivities[selectedActivityIndex];
 
         event.originalEvent.dataTransfer.setData("SelectedActivity", selectedActivityIndex);
         event.originalEvent.dataTransfer.setData("From", null);
 
     });
 
-    // onDragEnd:
-    view.parkedActivitiesContainer.on('dragend', this, function(event) {
-        console.log('dragend');
+    /**
+     * onDragEnter:
+     */
+    $(view.container).find('.parked-activity-wrapper').on('dragenter', this, function(event) {
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
+        target.classList.add('dragOver');
     });
 
-    // onDragOver: we need to catch this event and stop the propagation
-    // otherwise the 'drop' event won't be fired
-    view.parkedActivitiesContainer.on('dragover', this, function(event) {
+    /**
+     * onDragLeave:
+     */
+    $(view.container).find('.parked-activity-wrapper').on('dragleave', this, function(event) {
+        var target = event.target;
+        if (!target.classList.contains('parked-activity-wrapper')) {
+            return;
+        }
+        target.classList.remove('dragOver');
+    });
+
+    /**
+     * onDragOver:
+     */
+    $(view.container).find('.parked-activity-wrapper').on('dragover', this, function(event) {
+        console.log('dragover: parked-wrapper');
         event.preventDefault();
         event.stopPropagation();
     });
 
-    // onDragEnter:
-    view.parkedActivitiesContainer.on('dragenter', this, function(event) {
-        console.log('dragenter()');
-        event.target.classList.add('over');
-    });
+    /**
+     * onDrop:
+     */
+    $(view.container).find('.parked-activity-wrapper').on('drop', this, function(event) {
 
-    // onDragLeave:
-    view.parkedActivitiesContainer.on('dragleave', this, function(event) {
-        console.log('dragleave()');
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.classList.remove('over');
-    });
-
-    // onDrop:
-    view.parkedActivitiesContainer.on('drop', this, function(event) {
-
-        console.log('drop');
+        console.log('drop: wrapper');
 
         event.preventDefault();
         event.stopPropagation();
-
-        event.target.classList.remove('over');
 
         var selectedActivityIndex = event.originalEvent.dataTransfer.getData("SelectedActivity");
         var from = event.originalEvent.dataTransfer.getData("From");
@@ -157,43 +176,18 @@ var ParkedActivitiesController = function(view, model) {
             from = null;
         }
 
-        // TODO: determine newposition of the activity
-        // add the activity at the end of the day
-        model.moveActivity(from, selectedActivityIndex, null, null);
+        var target = event.target;
+        while (!target.classList.contains('parked-activity-wrapper')) {
+            target = target.parentNode;
+        }
 
-    });
+        target.parentNode.classList.remove('dragOver');
 
-
-
-    // onDrop:
-    $(view.container).find('.activity').on('drop', this, function(event) {
-
-        console.log('drop on activity');
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        // TODO: same dirty hack as below...
-        // hide the 'X' for delete an activity
-        event.target.classList.remove('over');
-        event.target.parentNode.classList.remove('over');
-
-        // TODO: fix this dirty hack (same as above)
-        // determine the index of the activity
         var droppedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
-            if (view.parkedActivitiesContainer.children()[i] == event.target) {
+            if (view.parkedActivitiesContainer.children()[i] == target) {
                 droppedActivityIndex = i;
                 break;
-            }
-        }
-        if (droppedActivityIndex == -1) {
-            var parent = event.target.parentNode;
-            for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
-                if (view.parkedActivitiesContainer.children()[i] == parent) {
-                    droppedActivityIndex = i;
-                    break;
-                }
             }
         }
         if (droppedActivityIndex == -1) {
@@ -201,14 +195,58 @@ var ParkedActivitiesController = function(view, model) {
             return;
         }
 
-        var selectedActivityIndex = event.originalEvent.dataTransfer.getData('SelectedActivity');
+        model.moveActivity(from, selectedActivityIndex, null, droppedActivityIndex);
 
-        console.log('from: ' + selectedActivityIndex);
-        console.log('to: ' + droppedActivityIndex);
+    });
 
-//        // TODO: determine newposition of the activity
-//        // add the activity at the end of the day
-        model.moveActivity(null, selectedActivityIndex, null, droppedActivityIndex);
+
+    /**
+     * onDragEnter: If an element is dragged over the parkedActivitiesContainer
+     * highlight the container with a dashed red border so that it's clear that
+     * the element can dropped here.
+     */
+    view.parkedActivitiesContainer.on('dragenter', this, function(event) {
+        event.target.classList.add('dragOver');
+    });
+
+    /**
+     * onDragLeave: If a dragged element leaves the parkedActivitiesContainer
+     * un-highlight the container.
+     */
+    view.parkedActivitiesContainer.on('dragleave', this, function(event) {
+        event.target.classList.remove('dragOver');
+    });
+
+    /**
+     * onDragOver: We need to catch this event and stop the propagation
+     * otherwise the 'drop' event won't be fired.
+     */
+    view.parkedActivitiesContainer.on('dragover', this, function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    /**
+     * onDrop: Add the dragged activity at the end of the list of all
+     * parked activities.
+     */
+    view.parkedActivitiesContainer.on('drop', this, function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        // un-highlight the parkedActivitiesContainer
+        event.target.classList.remove('dragOver');
+
+        var selectedActivityIndex = event.originalEvent.dataTransfer.getData("SelectedActivity");
+        var from = event.originalEvent.dataTransfer.getData("From");
+        if (from == 'null') {
+            from = null;
+        }
+
+        // since the activity was dropped on another activity, we add the dropped
+        // activity at the end
+        model.moveActivity(from, selectedActivityIndex, null, null);
 
     });
 

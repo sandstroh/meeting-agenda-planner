@@ -177,6 +177,7 @@ function MeetingAgendaPlannerModel(){
 	
 	// add an activity to parked activities
 	this.addParkedActivity = function(activity, position){
+        console.log('add parked activity...');
         if (position == null) {
 		    this.parkedActivities.push(activity);
         } else {
@@ -184,6 +185,18 @@ function MeetingAgendaPlannerModel(){
         }
 		this.notifyObservers();
 	};
+
+    // added:
+    // add an activity on provided position from parked activites
+    // without notifying observers
+    this._addParkedActivity = function(activity, position){
+        if (position == null) {
+            this.parkedActivities.push(activity);
+        } else {
+            this.parkedActivities.splice(position, 0, activity);
+        }
+    };
+
 
     // edit a parked activity
     this.editParkedActivity = function(oldActivity, editedActivity) {
@@ -225,10 +238,14 @@ function MeetingAgendaPlannerModel(){
         }else if(oldday == null && newday == null) {
             // fixed: it's now possible to add an activity at a specific position
             var activity = this._removeParkedActivity(oldposition);
-            if (oldposition > newposition) {
-                this.addParkedActivity(activity,newposition);
+            if (newposition == null) {
+                this._addParkedActivity(activity, null);
             } else {
-                this.addParkedActivity(activity,newposition-1);
+                if (oldposition > newposition) {
+                    this._addParkedActivity(activity,newposition);
+                } else {
+                    this._addParkedActivity(activity,newposition-1);
+                }
             }
         }else if(oldday == null) {
             var activity = this.removeParkedActivity(oldposition);
