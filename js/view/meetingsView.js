@@ -11,9 +11,6 @@ var MeetingsView = function(container, model) {
     this.dayViewsContainer = container.find("#dayViewsContainer");
     this.addDayButton = container.find('#addDayButton');
 
-    var halitTestView = new HalitTestView(container,model);
-    var halitController = new HalitTestController(halitTestView,model);
-
     model.addObserver(this);
 
     this.update = function() {
@@ -38,11 +35,13 @@ var MeetingsView = function(container, model) {
             var dayView = new DayView(dayDiv, model, model.days[i]);
             var dayController = new DayController(dayView, model, model.days[i]);
 
+            var halitTestView = new HalitTestView(container,model, model.days[i]);
+            var halitController = new HalitTestController(halitTestView,model,model.days[i]);
+
             column.append(dayDiv);
             trTag.append(column);
             meetingTable.append(trTag);
             this.dayViewsContainer.append(meetingTable);
-
         }
     }
 

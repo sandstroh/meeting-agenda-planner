@@ -1,10 +1,16 @@
-var HalitTestView = function(container,model)
+var HalitTestView = function(container,model,day)
 {
     model.addObserver(this);
     this.update = function()
     {
+        var huhh = $('#meetingsView').width();
+        //$("#meetingsView").css("width", "150%");
+
         this.mainDiv = container.find("#overallDayContainer");
         this.addButton = container.find("#wiener");
+
+        var bigTestDiv = $("<div>");
+        bigTestDiv.attr("style","display: table-cell;overflow:hidden;width:700px;height:400px;");
 
         this.contain = container;
 
@@ -13,20 +19,19 @@ var HalitTestView = function(container,model)
         div.attr("style","height:150px;width:250px;float:left;");
 
         var startDiv = $("<div>");
-        startDiv.html("Start Time");
+        startDiv.html("Start Time: ");
 
         var startSpan = $("<span>");
         startSpan.attr("id","startActivityTime");
         var textArea = $("<input>");
         textArea.attr("type","text");
-        textArea.attr("value","08:00");
+        //textArea.attr("value","08:00");
 
         startSpan.append(textArea);
         startDiv.append(startSpan);
 
-
         var endDiv = $("<div>");
-        endDiv.html("End Time");
+        endDiv.html("End Time: ");
         var endSpan = $("<span>");
         endSpan.attr("id","endActivityTime");
 
@@ -34,7 +39,7 @@ var HalitTestView = function(container,model)
         div.append(endDiv);
 
         var totalDiv = $("<div>");
-        totalDiv.html("Total Time");
+        totalDiv.html("Total Time: ");
         var totalSpan = $("<span>");
         totalSpan.attr("id","totalActivityTime");
         totalDiv.append(totalSpan);
@@ -51,35 +56,51 @@ var HalitTestView = function(container,model)
         canvasElement.attr("id","activityTimeGraph");
         canvasElement.attr("width","70");
         canvasElement.attr("height","100");
-        canvasElement.attr("style","border:1px solid #000000;");
+        canvasElement.attr("style","border:1px solid #000000;position:absolute;");
         canvasDiv.append(canvasElement);
 
         var tableDiv = $("<div>");
         tableDiv.attr("id","tableContainer");
-        tableDiv.attr("style","width:250px;");
+        tableDiv.attr("style","width:350px;");
 
         var tableTag = $("<table>");
         tableTag.addClass("table");
         tableTag.attr("id","activityTable");
         tableTag.attr("style","width:320px;height:500px;border:dashed gray;");
 
-        //1 tr 2 td
-        var trTag = $("<tr>");
-        var timeRow = $("<td>");
-        timeRow.html("08:00");
-        var nameRow = $("<td>");
-        nameRow.html("dark side");
-        trTag.append(timeRow);
-        trTag.append(nameRow);
 
-        tableTag.append(trTag);
         tableDiv.append(tableTag);
 
+
+        bigTestDiv.append(div);
+        bigTestDiv.append(canvasDiv);
+        bigTestDiv.append(tableDiv);
+        /*
         this.mainDiv.append(div);
         this.mainDiv.append(canvasDiv);
         this.mainDiv.append(tableDiv);
+        */
 
-        window.alert("breaking the habit");
+        for(var i = 0; i < day.getActivities().length; i++)
+        {
+            textArea.attr("value",day.getStart());
+            endSpan.html(day.getEnd());
+            totalSpan.html(day.getTotalLength() + "Min");
+            //1 tr 2 td
+            var trTag = $("<tr>");
+            var timeRow = $("<td>");
+            //timeRow.html("08:00");
+            var nameRow = $("<td>");
+            //nameRow.html("dark side");
+            timeRow.html(day.getActivities()[i].getLength());
+            nameRow.html(day.getActivities()[i].getName());
+
+            trTag.append(timeRow);
+            trTag.append(nameRow);
+            tableTag.append(trTag);
+        }
+
+        this.mainDiv.append(bigTestDiv);
     }
     this.update();
 }
