@@ -3,8 +3,6 @@
  */
 var ActivityDialogController = function(view, model) {
 
-    var done = false;
-
     view.cancelButton.click(function() {
         view.activity = null;
     });
