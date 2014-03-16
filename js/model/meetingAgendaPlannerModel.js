@@ -177,7 +177,6 @@ function MeetingAgendaPlannerModel(){
 	
 	// add an activity to parked activities
 	this.addParkedActivity = function(activity, position){
-        console.log('add parked activity...');
         if (position == null) {
 		    this.parkedActivities.push(activity);
         } else {
