@@ -1,0 +1,8 @@
+#activityDialog > .modal-dialog {
+    width: 350px;
+}
+
+.activitydialog-table td {
+    text-align: right;
+    padding: 5px;
+}

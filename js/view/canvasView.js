@@ -3,15 +3,26 @@
  */
 var CanvasView = function(canvas, model, day) {
 
+    model.addObserver(this);
+
     this.update = function() {
 
         var activities = day.getActivities();
+
+        /** Define all used colors here: **/
+        var colorBox = "#000000";
+        var colorBreakLine = "#ff0000";
+        var colorPresentations = "#ff0000";
+        var colorGroupWorks = "#00ff00";
+        var colorDiscussions = "#e5e100";
+        var colorBreaks = "#0000ff";
 
         var lengthPresentations = 0;
         var lengthGroupWorks = 0;
         var lengthDiscussions = 0;
         var lengthBreaks = 0;
 
+        // calculate the percentage of each activity type of the overall day
         for (var i = 0; i < activities.length; i++) {
             switch (activities[i].getTypeId()) {
                 case 0:
@@ -46,9 +57,10 @@ var CanvasView = function(canvas, model, day) {
 
         var start_y;
         var end_y;
-        // draw percentage presentations
+
+        // draw the percentage of the presentations
         if (percentagePresentations > 0) {
-            ctx.fillStyle = 'red';
+            ctx.fillStyle = colorPresentations;
             start_y = box_offset_y;
             end_y = box_height * percentagePresentations;
             if (start_y + end_y > box_height + box_offset_y) {
@@ -57,9 +69,9 @@ var CanvasView = function(canvas, model, day) {
             ctx.fillRect(5, start_y, box_width, end_y);
         }
 
-        // draw percentage group works
+        // draw the percentage of the group works
         if (percentageGroupWorks > 0) {
-            ctx.fillStyle = 'green';
+            ctx.fillStyle = colorGroupWorks;
             start_y = end_y;
             end_y = start_y + box_height * percentageGroupWorks;
             if (start_y + end_y > box_height + box_offset_y) {
@@ -68,9 +80,9 @@ var CanvasView = function(canvas, model, day) {
             ctx.fillRect(5, start_y, box_width, end_y);
         }
 
-        // draw percentage discussions
+        // draw the percentage of the discussions
         if (percentageDiscussions > 0) {
-            ctx.fillStyle = 'yellow';
+            ctx.fillStyle = colorDiscussions;
             start_y = end_y;
             end_y = start_y + box_height * percentageDiscussions;
             if (start_y + end_y > box_height + box_offset_y) {
@@ -79,9 +91,9 @@ var CanvasView = function(canvas, model, day) {
             ctx.fillRect(5, start_y, box_width, end_y);
         }
 
-        // draw percentage breaks
+        // draw the percentage of the breaks
         if (percentageBreaks > 0) {
-            ctx.fillStyle = 'blue';
+            ctx.fillStyle = colorBreaks;
             start_y = end_y;
             end_y = start_y + box_height * percentageBreaks;
             if (start_y + end_y > box_height + box_offset_y) {
@@ -90,9 +102,18 @@ var CanvasView = function(canvas, model, day) {
             ctx.fillRect(5, start_y, box_width, end_y);
         }
 
-        // draw border of box:
-        ctx.strokeStyle = "#000000";
+        // draw the border of box
+        ctx.strokeStyle = colorBox;
         ctx.rect(box_offset_x - 1, box_offset_y - 1, box_width + 2, box_height + 2);
+        ctx.stroke();
+
+        // draw the 30%-breaks line
+        ctx.strokeStyle = colorBreakLine;
+        ctx.beginPath();
+        var y = box_offset_y + box_height * 0.7;
+        ctx.moveTo(0, y);
+        ctx.lineTo(70, y);
+        ctx.closePath();
         ctx.stroke();
 
     }
