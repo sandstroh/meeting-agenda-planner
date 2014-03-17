@@ -20,6 +20,7 @@
             var data = ev.dataTransfer.getData("Text");
             ev.target.appendChild(document.getElementById(data));
         }
+
     </script>
 
 <div class="container">
@@ -32,17 +33,14 @@
             </div>
             <button class="btn" data-toggle="modal" data-target="#addNewActivityView">Add Activity</button>
         </div>
-        <div id="meetingsView" class="col-md-8">
+
+        <div id="meetingsView" class="col-md-8" style="">
             <h4>Meeting:</h4>
-            <div id="overallDayContainer">
-
-
-
+                <div id="overallDayContainer" style="display: table-row;overflow:hidden;">
                 </div>
-
-
-            </div>
+                <button id="wiener" type="button" class="btn btn-success">Shall I push the button</button>
         </div>
+    </div>
     </div>
 </div>
 
@@ -106,9 +104,10 @@
 <script src="js/controller/dayController.js"></script>
 <script src="js/view/canvasView.js"></script>
 <script src="js/app.js"></script>
-
+<script src="js/util/timeFormatter.js"></script>
 
 <script src="js/view/halittestview.js"></script>
+<script src="js/controller/halitTestController.js"></script>
 
 
 </body>
