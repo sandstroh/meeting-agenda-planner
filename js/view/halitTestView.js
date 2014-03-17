@@ -1,13 +1,12 @@
 var HalitTestView = function(container,model,day)
 {
-    model.addObserver(this);
+    //model.addObserver(this);
     this.update = function()
     {
         var huhh = $('#meetingsView').width();
-        //$("#meetingsView").css("width", "150%");
 
-        this.mainDiv = container.find("#overallDayContainer");
-        this.addButton = container.find("#wiener");
+        this.mainDiv = container.find("#dayViewsContainer");
+        this.addButton = container.find("#addDayButton");
 
         var bigTestDiv = $("<div>");
         bigTestDiv.attr("style","display: table-cell;overflow:hidden;width:700px;height:400px;");
@@ -68,39 +67,31 @@ var HalitTestView = function(container,model,day)
         tableTag.attr("id","activityTable");
         tableTag.attr("style","width:320px;height:500px;border:dashed gray;");
 
-
         tableDiv.append(tableTag);
-
 
         bigTestDiv.append(div);
         bigTestDiv.append(canvasDiv);
         bigTestDiv.append(tableDiv);
-        /*
-        this.mainDiv.append(div);
-        this.mainDiv.append(canvasDiv);
-        this.mainDiv.append(tableDiv);
-        */
+
+        var trTag = $("<tr>");
+        var timeRow = $("<td>");
+        var nameRow = $("<td>");
 
         for(var i = 0; i < day.getActivities().length; i++)
         {
             textArea.attr("value",day.getStart());
             endSpan.html(day.getEnd());
             totalSpan.html(day.getTotalLength() + "Min");
-            //1 tr 2 td
-            var trTag = $("<tr>");
-            var timeRow = $("<td>");
-            //timeRow.html("08:00");
-            var nameRow = $("<td>");
-            //nameRow.html("dark side");
             timeRow.html(day.getActivities()[i].getLength());
             nameRow.html(day.getActivities()[i].getName());
-
-            trTag.append(timeRow);
-            trTag.append(nameRow);
-            tableTag.append(trTag);
         }
 
+         trTag.append(timeRow);
+                    trTag.append(nameRow);
+                    tableTag.append(trTag);
+
         this.mainDiv.append(bigTestDiv);
+        window.alert("called the update");
     }
     this.update();
 }

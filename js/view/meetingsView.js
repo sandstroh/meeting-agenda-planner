@@ -21,13 +21,15 @@ var MeetingsView = function(container, model) {
         // clear day views container before adding the days in the model
         this.dayViewsContainer.empty();
 
-        var meetingTable = $('<table>');
+        /*var meetingTable = $('<table>');
         meetingTable.addClass("table table-bordered");
-        meetingTable.attr("id","meeting-table");
+        meetingTable.attr("id","meeting-table");*/
 
-        for (var i = 0; i < model.days.length; i++)
+       for (var i = 0; i < model.days.length; i++)
         {
-            var trTag = $("<tr>");
+            var halitTestView = new HalitTestView(container,model, model.days[i]);
+
+            /*var trTag = $("<tr>");
             var column = $("<td>");
             column.addClass("active");
 
@@ -35,13 +37,10 @@ var MeetingsView = function(container, model) {
             var dayView = new DayView(dayDiv, model, model.days[i]);
             var dayController = new DayController(dayView, model, model.days[i]);
 
-            var halitTestView = new HalitTestView(container,model, model.days[i]);
-            var halitController = new HalitTestController(halitTestView,model,model.days[i]);
-
             column.append(dayDiv);
             trTag.append(column);
             meetingTable.append(trTag);
-            this.dayViewsContainer.append(meetingTable);
+            this.dayViewsContainer.append(meetingTable);*/
         }
     }
 

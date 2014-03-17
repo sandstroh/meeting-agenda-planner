@@ -3,7 +3,7 @@
  */
 var MeetingsController = function(view, model) {
 
-    view.addDayButton.click(function() {
+    view.addDayButton.click(function(){
         model.addDay();
     });
 
