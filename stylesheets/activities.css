@@ -1,17 +1,24 @@
 /**
  * Activity colors
  */
+
+/** TODO: merge activites.css with parked-activities.css **/
+.parked-activity {
+    color: white;
+}
+
 .activity-presentation {
-    background-color: #ff2d23;
+    /*background-color: #ff2d23;*/
+    background-color: #D9534F;
 }
 .activity-group-work {
-    background-color: #25b219;
+    background-color: #5CB85C;
 }
 .activity-discussion {
-    background-color: #e5e100;
+    background-color: #F0AD4E;
 }
 .activity-break {
-    background-color: #184fff;
+    background-color: #5BC0DE;
 }
 
 /* TODO: where does this belong to? */
