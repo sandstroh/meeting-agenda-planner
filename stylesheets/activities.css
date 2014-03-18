@@ -5,10 +5,10 @@
 /** TODO: merge activites.css with parked-activities.css **/
 .parked-activity {
     color: white;
+    text-shadow: 1px 1px #777777;
 }
 
 .activity-presentation {
-    /*background-color: #ff2d23;*/
     background-color: #D9534F;
 }
 .activity-group-work {
