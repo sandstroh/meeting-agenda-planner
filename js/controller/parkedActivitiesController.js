@@ -13,26 +13,26 @@ var ParkedActivitiesController = function(view, model) {
     });
 
 
-    /**
-     * Display the 'X' for delete an activity.
-     */
-    $(view.container).find('.parked-activity-wrapper').on('mouseenter', this, function(event) {
-        var target = event.target;
-        while (!target.classList.contains('parked-activity-wrapper')) {
-            target = target.parentNode;
-        }
-        target.classList.add('mouseOver');
-    });
-    /**
-     * Hide the 'X' for delete an activity.
-     */
-    $(view.container).find('.parked-activity-wrapper').on('mouseleave', this, function(event) {
-        var target = event.target;
-        while (!target.classList.contains('parked-activity-wrapper')) {
-            target = target.parentNode;
-        }
-        target.classList.remove('mouseOver');
-    });
+//    /**
+//     * Display the 'X' for delete an activity.
+//     */
+//    $(view.container).find('.parked-activity-wrapper').on('mouseenter', this, function(event) {
+//        var target = event.target;
+//        while (!target.classList.contains('parked-activity-wrapper')) {
+//            target = target.parentNode;
+//        }
+//        target.classList.add('mouseOver');
+//    });
+//    /**
+//     * Hide the 'X' for delete an activity.
+//     */
+//    $(view.container).find('.parked-activity-wrapper').on('mouseleave', this, function(event) {
+//        var target = event.target;
+//        while (!target.classList.contains('parked-activity-wrapper')) {
+//            target = target.parentNode;
+//        }
+//        target.classList.remove('mouseOver');
+//    });
 
     /**
      * Delete the activity on a click on the 'X'.
@@ -73,7 +73,7 @@ var ParkedActivitiesController = function(view, model) {
         }
 
         // hide the 'X' for delete an activity
-        target.classList.remove('mouseOver');
+//        target.classList.remove('mouseOver');
 
         // determine the index of the activity
         var selectedActivityIndex = -1;

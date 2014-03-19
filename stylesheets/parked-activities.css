@@ -23,6 +23,10 @@
 .parked-activity-wrapper > div > .glyphicon-remove {
     visibility: hidden;
 }
-.parked-activity-wrapper.mouseOver > div > .glyphicon-remove {
+.parked-activity-wrapper:hover > div > .glyphicon-remove {
     visibility: visible;
+}
+
+#addActivityButton {
+    margin-top: 15px;
 }
