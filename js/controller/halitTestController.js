@@ -1,6 +1,6 @@
 var HalitTestController = function(view,model,day)
 {
-//    view.addButton.click(function(){
-//        view.update();
-//    });
+    view.cancelButton.click(function(){
+        model.deleteDay(day);
+    });
 }

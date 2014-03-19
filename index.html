@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="stylesheets/activities.css">
     <link rel="stylesheet" href="stylesheets/parked-activities.css">
     <link rel="stylesheet" href="stylesheets/activity-dialog.css">
-
+    <link rel="shortcut icon" href="images/favicon.ico">
 </head>
 <body>
 
     <div class="container">
         <div class="row">
-
+            <div style="background-color:#6495ed;text-align:center;height:100px;padding-top:11px;">
+                <h1><strong>WELCOME TO THE SCHEDULE PLANNER</strong></h1>
+            </div>
             <!-- Parked Activities View -->
             <div id="parkedActivitiesView" class="col-md-4">
                 <h4>Activities:</h4>
@@ -35,7 +37,8 @@
                     <!--&lt;!&ndash; container for days &ndash;&gt;-->
                 <!--</div>-->
                 <div id="overallDayContainer" style="display: table-row;overflow:hidden;"></div>
-                <button id="addDayButton" type="button">Add Day</button>
+                <button id="addDayButton" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add Day</button>
             </div>
 
         </div>
