@@ -181,7 +181,7 @@ var ParkedActivitiesController = function(view, model) {
             target = target.parentNode;
         }
 
-        target.parentNode.classList.remove('dragOver');
+        target.classList.remove('dragOver');
 
         var droppedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
