@@ -4,5 +4,30 @@
 
 .activitydialog-table td {
     text-align: right;
-    padding: 5px;
+    vertical-align: top;
+    padding: 8px 5px 5px 5px;
+}
+
+.error-label {
+    display: none;
+    text-align: left;
+    font-weight: normal;
+    color: red;
+}
+.error-label.error {
+    display: inline-block;
+}
+
+#activityLengthWrapper {
+    margin-left: 0px;
+}
+#activityLength {
+    width: 75%;
+}
+#activityLengthWrapper span {
+    padding-top: 5px;
+}
+
+#activityDescription {
+    height: 100px;
 }

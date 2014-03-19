@@ -17,19 +17,42 @@ var ActivityDialogController = function(view, model) {
 
     });
 
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
     function editActivity() {
 
-        // get values for new activity
+        // get the name of the activity
+        // and check that it's not empty
         var name = view.activityName.val();
-        // check that the name of the new activity isn't empty
         if (name == '') {
             event.preventDefault();
             event.stopPropagation();
-            alert('Error: the name of an activity cannot be empty!');
+            view.activityNameErrorLabel.addClass('error');
             return;
-
         }
+
+        // get the length of the activity
+        // and check that the value is numerical and greater than 0
         var length = view.activityLength.val();
+        if (isNumber(length)) {
+            if (length <= 0) {
+                event.preventDefault();
+                event.stopPropagation();
+                view.activityLengthErrorLabel.html('Length must be greater than 0.');
+                view.activityLengthErrorLabel.addClass('error');
+                return;
+            }
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+            view.activityLengthErrorLabel.html('Value must be numerical.');
+            view.activityLengthErrorLabel.addClass('error');
+            return;
+        }
+
+        // get the type of the activity
         var type = view.activityType.val();
         switch (type) {
             case '0':
@@ -43,6 +66,8 @@ var ActivityDialogController = function(view, model) {
             default:
                 console.log("Error: unknown activity type");
         }
+
+        // get the description of the activity
         var description = view.activityDescription.val();
 
         // create new activity and replace the old activity in the model
@@ -53,18 +78,36 @@ var ActivityDialogController = function(view, model) {
 
     function addNewActivity() {
 
-        // get values for new activity
+        // get the name of the activity
+        // and check that it's not empty
         var name = view.activityName.val();
-        // check that the name of the new activity isn't empty
         if (name == '') {
             event.preventDefault();
             event.stopPropagation();
-            // TODO: don't show an alert. display a warning/error! that disappers when name != ''
-            alert('Error: the name of an activity cannot be empty!');
+            view.activityNameErrorLabel.addClass('error');
             return;
-
         }
+
+        // get the length of the activity
+        // and check that the value is numerical and greater than 0
         var length = view.activityLength.val();
+        if (isNumber(length)) {
+            if (length <= 0) {
+                event.preventDefault();
+                event.stopPropagation();
+                view.activityLengthErrorLabel.html('Length must be greater than 0.');
+                view.activityLengthErrorLabel.addClass('error');
+                return;
+            }
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+            view.activityLengthErrorLabel.html('Value must be numerical.');
+            view.activityLengthErrorLabel.addClass('error');
+            return;
+        }
+
+        // get the type of the activity
         var type = view.activityType.val();
         switch (type) {
             case '0':
@@ -78,6 +121,8 @@ var ActivityDialogController = function(view, model) {
             default:
                 console.log("Error: unknown activity type");
         }
+
+        // get the description of the activity
         var description = view.activityDescription.val();
 
         // create new activity and add it to the model
