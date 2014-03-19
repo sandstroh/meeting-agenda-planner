@@ -93,7 +93,11 @@ var ActivityDialogView = function(container, model, activity) {
         this.activityName.attr('id', 'activityName');
         this.activityName.attr('type', 'text');
         this.activityName.addClass('form-control');
+        this.activityNameErrorLabel = $('<label>');
+        this.activityNameErrorLabel.html('Name must not be empty.');
+        this.activityNameErrorLabel.addClass('error-label');
         tdNameInput.append(this.activityName);
+        tdNameInput.append(this.activityNameErrorLabel);
         trName.append(tdNameLabel);
         trName.append(tdNameInput);
 

@@ -25,9 +25,8 @@ var ActivityDialogController = function(view, model) {
         if (name == '') {
             event.preventDefault();
             event.stopPropagation();
-            alert('Error: the name of an activity cannot be empty!');
+            view.activityNameErrorLabel.addClass('error');
             return;
-
         }
         var length = view.activityLength.val();
         var type = view.activityType.val();
@@ -59,8 +58,7 @@ var ActivityDialogController = function(view, model) {
         if (name == '') {
             event.preventDefault();
             event.stopPropagation();
-            // TODO: don't show an alert. display a warning/error! that disappers when name != ''
-            alert('Error: the name of an activity cannot be empty!');
+            view.activityNameErrorLabel.addClass('error');
             return;
 
         }
