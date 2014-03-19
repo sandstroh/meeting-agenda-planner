@@ -1,9 +1,9 @@
 #parkedActivitiesContainer {
-    border: solid black 1px;
+    border: dashed grey;
     min-height: 200px;
 }
 #parkedActivitiesContainer.dragOver {
-    border: dashed red 1px;
+    border: dashed red;
 }
 
 .parked-activity-wrapper {
