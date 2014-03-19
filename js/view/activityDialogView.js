@@ -113,7 +113,7 @@ var ActivityDialogView = function(container, model, activity) {
 
         var trType = $('<tr>');
         var tdTypeLabel = $('<td>');
-        tdTypeLabel.html('Description:');
+        tdTypeLabel.html('Type:');
         var tdTypeInput = $('<td>');
         this.activityType = $('<select>');
         this.activityType.attr('id', 'activityType');
@@ -140,9 +140,10 @@ var ActivityDialogView = function(container, model, activity) {
 
         var trDescription = $('<tr>');
         var tdDescriptionLabel = $('<td>');
+        tdDescriptionLabel.attr('id', 'activityDescriptionLabel');
         tdDescriptionLabel.html('Description:');
         var tdDescriptionInput = $('<td>');
-        this.activityDescription = $('<input>');
+        this.activityDescription = $('<textarea>');
         this.activityDescription.attr('id', 'activityDescription');
         this.activityDescription.attr('type', 'text');
         this.activityDescription.addClass('form-control');

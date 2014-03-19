@@ -6,3 +6,12 @@
     text-align: right;
     padding: 5px;
 }
+
+#activityDescriptionLabel {
+    vertical-align: top;
+    padding-top: 8px;
+}
+
+#activityDescription {
+    height: 100px;
+}
