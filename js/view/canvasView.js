@@ -12,10 +12,10 @@ var CanvasView = function(canvas, model, day) {
         /** Define all used colors here: **/
         var colorBox = "#000000";
         var colorBreakLine = "#ff0000";
-        var colorPresentations = "#ff0000";
-        var colorGroupWorks = "#00ff00";
-        var colorDiscussions = "#e5e100";
-        var colorBreaks = "#0000ff";
+        var colorPresentations = "#D9534F";
+        var colorGroupWorks = "#5CB85C";
+        var colorDiscussions = "#F0AD4E";
+        var colorBreaks = "#5BC0DE";
 
         var lengthPresentations = 0;
         var lengthGroupWorks = 0;

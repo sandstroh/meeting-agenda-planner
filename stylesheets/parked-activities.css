@@ -1,9 +1,9 @@
 #parkedActivitiesContainer {
-    border: solid black 1px;
-    min-height: 200px;
+    border: dashed grey;
+    min-height: 500px;
 }
 #parkedActivitiesContainer.dragOver {
-    border: dashed red 1px;
+    border: dashed red;
 }
 
 .parked-activity-wrapper {
@@ -23,6 +23,10 @@
 .parked-activity-wrapper > div > .glyphicon-remove {
     visibility: hidden;
 }
-.parked-activity-wrapper.mouseOver > div > .glyphicon-remove {
+.parked-activity-wrapper:hover > div > .glyphicon-remove {
     visibility: visible;
+}
+
+#addActivityButton {
+    margin-top: 15px;
 }

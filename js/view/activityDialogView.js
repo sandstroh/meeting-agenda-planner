@@ -93,7 +93,11 @@ var ActivityDialogView = function(container, model, activity) {
         this.activityName.attr('id', 'activityName');
         this.activityName.attr('type', 'text');
         this.activityName.addClass('form-control');
+        this.activityNameErrorLabel = $('<label>');
+        this.activityNameErrorLabel.html('Name must not be empty.');
+        this.activityNameErrorLabel.addClass('error-label');
         tdNameInput.append(this.activityName);
+        tdNameInput.append(this.activityNameErrorLabel);
         trName.append(tdNameLabel);
         trName.append(tdNameInput);
 
@@ -101,19 +105,32 @@ var ActivityDialogView = function(container, model, activity) {
         var tdLengthLabel = $('<td>')
         tdLengthLabel.html('Length:');
         var tdLengthInput = $('<td>');
+        var activityLengthWrapper = $('<div>');
+        activityLengthWrapper.addClass('row');
+        activityLengthWrapper.attr('id', 'activityLengthWrapper');
         this.activityLength = $('<input>');
         this.activityLength.attr('id', 'activityLength');
         this.activityLength.attr('type', 'number');
         this.activityLength.attr('min', 1);
         this.activityLength.attr('max', 1440);
         this.activityLength.addClass('form-control');
-        tdLengthInput.append(this.activityLength);
+        this.activityLength.addClass('col-md-9');
+        var activityLengthSpan = $('<span>');
+        activityLengthSpan.html('min');
+        activityLengthSpan.addClass('col-md-3');
+        activityLengthWrapper.append(this.activityLength);
+        activityLengthWrapper.append(activityLengthSpan);
+        this.activityLengthErrorLabel = $('<label>');
+        this.activityLengthErrorLabel.html('Length must be > 0.');
+        this.activityLengthErrorLabel.addClass('error-label');
+        tdLengthInput.append(activityLengthWrapper);
+        tdLengthInput.append(this.activityLengthErrorLabel);
         trLength.append(tdLengthLabel);
         trLength.append(tdLengthInput);
 
         var trType = $('<tr>');
         var tdTypeLabel = $('<td>');
-        tdTypeLabel.html('Description:');
+        tdTypeLabel.html('Type:');
         var tdTypeInput = $('<td>');
         this.activityType = $('<select>');
         this.activityType.attr('id', 'activityType');
@@ -140,9 +157,10 @@ var ActivityDialogView = function(container, model, activity) {
 
         var trDescription = $('<tr>');
         var tdDescriptionLabel = $('<td>');
+        tdDescriptionLabel.attr('id', 'activityDescriptionLabel');
         tdDescriptionLabel.html('Description:');
         var tdDescriptionInput = $('<td>');
-        this.activityDescription = $('<input>');
+        this.activityDescription = $('<textarea>');
         this.activityDescription.attr('id', 'activityDescription');
         this.activityDescription.attr('type', 'text');
         this.activityDescription.addClass('form-control');
