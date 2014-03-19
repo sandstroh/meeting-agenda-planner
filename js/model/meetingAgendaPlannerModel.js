@@ -66,9 +66,10 @@ function Activity(name,length,typeid,description){
 // This is a day consturctor. You can use it to create days, 
 // but there is also a specific function in the Model that adds
 // days to the model, so you don't need call this yourself.
-function Day(startH,startM) {
+function Day(startH,startM,id) {
 	this._start = startH * 60 + startM;
 	this._activities = [];
+	this.id = id;
 
 	// sets the start time to new value
 	this.setStart = function(startH,startM) {
@@ -156,15 +157,38 @@ function MeetingAgendaPlannerModel(){
 	this.addDay = function (startH,startM) {
 		var day;
 		if(startH){
-			day = new Day(startH,startM);
+			day = new Day(startH,startM,this.days.length);
 		} else {
-			day = new Day(8,0);
+			day = new Day(8,0,this.days.length);
 		}
 		this.days.push(day);
 		this.notifyObservers();
 		return day;
 	};
-	
+
+	this.deleteDay = function(day){
+	    for(var i = 0; i < this.days.length; i++)
+	    {
+	        if(this.days[i] == day){
+	            this.days.splice(i,1);
+	        }
+	    }
+
+        this.notifyObservers();
+	}
+
+	this.getIdOfDay = function(day)
+	{
+	    for(var i = 0; i < this.days.length; i++)
+	    {
+	        if(this.days[i] == day)
+	        {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
+
 	// add an activity to model
 	this.addActivity = function (activity,day,position) {
 		if(day != null) {
@@ -268,10 +292,10 @@ function MeetingAgendaPlannerModel(){
 
         this.addDay();
         this.addActivity(new Activity("Introduction", 10, 0, ""), 0);
-//        this.addActivity(new Activity("Idea 1", 30, 0, ""), 0);
-//        this.addActivity(new Activity("Working in groups", 35, 1, ""), 0);
-//        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
-//        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
+        this.addActivity(new Activity("Idea 1", 30, 0, ""), 0);
+        this.addActivity(new Activity("Working in groups", 35, 1, ""), 0);
+        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
+        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
 
 //        this.addDay();
 //        this.addActivity(new Activity("Presentation", 30, 0, ""), 1);

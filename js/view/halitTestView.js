@@ -20,6 +20,22 @@ var HalitTestView = function(container,model,day)
 //        div.attr("id","timeMenu");
         div.attr("style","height:150px;width:250px;float:left;");
 
+        var dayNumberDiv = $("<div>");
+        dayNumberDiv.attr("align","center");
+        dayNumberDiv.attr("style","width:322px;border:1px solid black;");
+
+        //<a class="btn" href="#"><i class="icon-align-left"></i></a>
+
+        this.cancelButton = $("<a>");
+        this.cancelButton.attr("id","cancelButton");
+        this.cancelButton.addClass("btn glyphicon glyphicon-remove-circle");
+        this.cancelButton.attr("href","#");
+        this.cancelButton.attr("style","float:right;margin-top:0px;right:-13px;");
+
+        var string = model.getIdOfDay(day)+1;
+        dayNumberDiv.html("Day:" + string);
+        dayNumberDiv.append(this.cancelButton);
+
         var startDiv = $("<div>");
         startDiv.html("Start Time: ");
 
@@ -45,6 +61,7 @@ var HalitTestView = function(container,model,day)
         var totalSpan = $("<span>");
 //        totalSpan.attr("id","totalActivityTime");
         totalDiv.append(totalSpan);
+
 
         div.append(startDiv);
         div.append(endDiv);
@@ -77,6 +94,7 @@ var HalitTestView = function(container,model,day)
 //        bigTestDiv.append(div);
 //        bigTestDiv.append(canvasDiv);
 //        bigTestDiv.append(tableDiv);
+        container.append(dayNumberDiv);
         container.append(div);
         container.append(canvasDiv);
         container.append(tableDiv);
@@ -87,7 +105,10 @@ var HalitTestView = function(container,model,day)
         */
 
         if (day.getActivities().length == 0) {
+
             var trTag = $("<tr>");
+            trTag.addClass("table-custom");
+            trTag.attr("style","height:1px;");
             var timeRow = $("<td>");
             //timeRow.html("08:00");
             var nameRow = $("<td>");
@@ -105,12 +126,32 @@ var HalitTestView = function(container,model,day)
                 totalSpan.html(day.getTotalLength() + "Min");
                 //1 tr 2 td
                 var trTag = $("<tr>");
+                trTag.addClass("table-custom");
+                if(i != day.getActivities().length - 1)
+                    trTag.attr("style","height:1px;");
                 var timeRow = $("<td>");
                 //timeRow.html("08:00");
                 var nameRow = $("<td>");
                 //nameRow.html("dark side");
                 timeRow.html(day.getActivities()[i].getLength());
                 nameRow.html(day.getActivities()[i].getName());
+
+                switch (day.getActivities()[i].getTypeId()) {
+                    case 0:
+                        trTag.addClass('activity-presentation');
+                        break;
+                    case 1:
+                        trTag.addClass('activity-group-work');
+                        break;
+                    case 2:
+                        trTag.addClass('activity-discussion');
+                        break;
+                    case 3:
+                        trTag.addClass('activity-break');
+                        break;
+                    default:
+                        console.log('Error: unknown activity type \'' + day.getActivities()[i].getTypeId() + '\'');
+                }
 
                 trTag.append(timeRow);
                 trTag.append(nameRow);
