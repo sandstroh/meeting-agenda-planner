@@ -101,13 +101,22 @@ var ActivityDialogView = function(container, model, activity) {
         var tdLengthLabel = $('<td>')
         tdLengthLabel.html('Length:');
         var tdLengthInput = $('<td>');
+        var activityLengthWrapper = $('<div>');
+        activityLengthWrapper.addClass('row');
+        activityLengthWrapper.attr('id', 'activityLengthWrapper');
         this.activityLength = $('<input>');
         this.activityLength.attr('id', 'activityLength');
         this.activityLength.attr('type', 'number');
         this.activityLength.attr('min', 1);
         this.activityLength.attr('max', 1440);
         this.activityLength.addClass('form-control');
-        tdLengthInput.append(this.activityLength);
+        this.activityLength.addClass('col-md-9');
+        var activityLengthSpan = $('<span>');
+        activityLengthSpan.html('min');
+        activityLengthSpan.addClass('col-md-3');
+        activityLengthWrapper.append(this.activityLength);
+        activityLengthWrapper.append(activityLengthSpan);
+        tdLengthInput.append(activityLengthWrapper);
         trLength.append(tdLengthLabel);
         trLength.append(tdLengthInput);
 

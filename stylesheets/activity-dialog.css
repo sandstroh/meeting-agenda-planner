@@ -7,6 +7,16 @@
     padding: 5px;
 }
 
+#activityLengthWrapper {
+    margin-left: 0px;
+}
+#activityLength {
+    width: 75%;
+}
+#activityLengthWrapper span {
+    padding-top: 5px;
+}
+
 #activityDescriptionLabel {
     vertical-align: top;
     padding-top: 8px;
