@@ -120,7 +120,11 @@ var ActivityDialogView = function(container, model, activity) {
         activityLengthSpan.addClass('col-md-3');
         activityLengthWrapper.append(this.activityLength);
         activityLengthWrapper.append(activityLengthSpan);
+        this.activityLengthErrorLabel = $('<label>');
+        this.activityLengthErrorLabel.html('Length must be > 0.');
+        this.activityLengthErrorLabel.addClass('error-label');
         tdLengthInput.append(activityLengthWrapper);
+        tdLengthInput.append(this.activityLengthErrorLabel);
         trLength.append(tdLengthLabel);
         trLength.append(tdLengthInput);
 
