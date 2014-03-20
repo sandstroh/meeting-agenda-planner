@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Meeting Agenda Planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+    <!-- Other stylesheets -->
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/activities.css">
+    <link rel="stylesheet" href="stylesheets/parked-activities.css">
+    <link rel="stylesheet" href="stylesheets/activity-dialog.css">
+    <link rel="stylesheet" href="stylesheets/day-view.css">
+    <link rel="stylesheet" href="stylesheets/edit-time-dialog.css">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div style="background-color:#6495ed;text-align:center;height:100px;padding-top:11px;">
+                <h1><strong>WELCOME TO THE SCHEDULE PLANNER</strong></h1>
+            </div>
+            <!-- Parked Activities View -->
+            <div id="parkedActivitiesView" class="col-md-4">
+                <h4>Activities:</h4>
+                <div id="parkedActivitiesContainer">
+                    <!-- container for parked activities-->
+                </div>
+                <button id="addActivityButton" type="button" class="btn">Add New Activity</button>
+            </div>
+
+            <!-- Meetings View -->
+            <div id="meetingsView" class="col-md-8">
+                <h4>Meeting:</h4>
+                <!--<div id="dayViewsContainer">-->
+                    <!--&lt;!&ndash; container for days &ndash;&gt;-->
+                <!--</div>-->
+                <div id="overallDayContainer" style="display: table-row;overflow:hidden;"></div>
+                <button id="addDayButton" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add Day</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="activityDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!-- activity dialog view -->
+    </div>
+
+    <div class="modal fade" id="editTimeDialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <!-- edit time dialog view -->
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+    <script src="js/util/timeFormatter.js"></script>
+
+    <script src="js/model/meetingAgendaPlannerModel.js"></script>
+
+    <script src="js/view/parkedActivitiesView.js"></script>
+    <script src="js/controller/parkedActivitiesController.js"></script>
+
+    <script src="js/view/activityDialogView.js"></script>
+    <script src="js/controller/activityDialogController.js"></script>
+
+    <script src="js/view/editTimeDialogView.js"></script>
+    <script src="js/controller/editTimeDialogController.js"></script>
+
+    <script src="js/view/meetingsView.js"></script>
+    <script src="js/controller/meetingsController.js"></script>
+
+    <script src="js/view/dayView.js"></script>
+    <script src="js/controller/dayController.js"></script>
+
+    <script src="js/view/canvasView.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

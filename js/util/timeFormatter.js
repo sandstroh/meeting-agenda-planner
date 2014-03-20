@@ -12,3 +12,36 @@ function formatTime(startH, startM) {
     }
     return time;
 }
+function isValidTime(time) {
+
+    if (time.indexOf(':') == -1) {
+        return false;
+    }
+    var parts = time.split(':');
+    if (parts.length != 2) {
+        return false;
+    }
+
+    var startH = -1;
+    if (!isNaN(parseFloat(parts[0])) && isFinite(parts[0])) {
+        startH = parseInt(parts[0]);
+    }
+    var startM = -1;
+    if (!isNaN(parseFloat(parts[1])) && isFinite(parts[1])) {
+        startM = parseInt(parts[1]);
+    }
+    if (startH == -1 || startM == -1) {
+        return false;
+    }
+
+    if (startH < 0 && startH > 24) {
+        return false;
+    }
+    if (startM < 0 && startM > 60) {
+        return false;
+    }
+
+    // all check passed: the given string is a valid time
+    return true;
+
+}

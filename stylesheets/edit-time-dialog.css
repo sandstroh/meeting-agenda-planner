@@ -1,0 +1,11 @@
+#editTimeDialog > .modal-dialog {
+    width: 202px;
+}
+
+.time-input-text {
+    width: 90px;
+}
+
+.time-save-button {
+    margin-left: 10px;
+}

@@ -7,7 +7,7 @@ var ParkedActivitiesView = function(container, model) {
     this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
     this.addNewActivityButton = container.find('#addActivityButton');
 
-    // register an observer to the model
+    // register this view as an observer to the model
     model.addObserver(this);
 
     // this function gets called when there is a change at the model
@@ -98,7 +98,7 @@ var ParkedActivitiesView = function(container, model) {
 
     }
 
-    // update the view
+    // create the view in the beginning
     this.update();
 
 }
