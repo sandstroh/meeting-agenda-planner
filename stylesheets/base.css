@@ -2,7 +2,9 @@
     border: black solid 1px;
 }
 
-
+#addDayButtonDiv{
+   margin-top:15px;
+}
 
 .activitiesDiv {
     border: solid black 1px;

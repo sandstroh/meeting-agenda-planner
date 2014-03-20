@@ -29,7 +29,6 @@ var MeetingsView = function(container, model) {
             var dayController = new DayController(dayView, model, model.days[i]);
 
             this.dayViewsContainer.append(dayDiv);
-
         }
 
     }
