@@ -3,14 +3,33 @@
  */
 var DayController = function(view, model, day) {
 
-    // onDragStart
-    view.activitiesDiv.on('dragstart', this, function(event) {
+    view.spanAddon.click(function() {
+        var editTimeDialog = new EditTimeDialog($('#editTimeDialog'), model, day);
+        var editTimeDialogController = new EditTimeDialogController(editTimeDialog, model, day);
+        $('#editTimeDialog').modal('show');
+    });
 
-        console.log('dragstart');
+    /**
+     * Delete a day
+     */
+    view.deleteDayButton.click(function(){
+        model.deleteDay(day);
+    });
 
+    /**
+     * Delete the activity on a click on the 'X'.
+     */
+    $(view.container).find('.glyphicon-remove').on('click', this, function(event) {
+
+        var target = event.target;
+        while (!target.classList.contains('day-activity-wrapper')) {
+            target = target.parentNode;
+        }
+
+        // determine the index of the activity
         var selectedActivityIndex = -1;
-        for (var i = 0; i < view.activitiesDiv.children().length; i++) {
-            if (view.activitiesDiv.children()[i] == event.target) {
+        for (var i = 0; i < view.dayActivitiesContainer.children().length; i++) {
+            if (view.dayActivitiesContainer.children()[i] == target) {
                 selectedActivityIndex = i;
                 break;
             }
@@ -20,6 +39,68 @@ var DayController = function(view, model, day) {
             return;
         }
 
+        model.removeActivity(day, selectedActivityIndex);
+
+    });
+
+    /**
+     * Show an 'Edit Activity' dialog, after a double-click on an activity.
+     */
+    $(view.container).find('.day-activity-wrapper').on('dblclick', this, function(event) {
+
+        var target = event.target;
+        while (!target.classList.contains('day-activity-wrapper')) {
+            target = target.parentNode;
+        }
+
+        // determine the index of the activity
+        var selectedActivityIndex = -1;
+        for (var i = 0; i < view.dayActivitiesContainer.children().length; i++) {
+            if (view.dayActivitiesContainer.children()[i] == target) {
+                selectedActivityIndex = i;
+                break;
+            }
+        }
+        if (selectedActivityIndex == -1) {
+            console.log('Error: selected activity not found');
+            return;
+        }
+        var selectedActivity = day.getActivities()[selectedActivityIndex];
+
+        var activityDialogView = new ActivityDialogView($('#activityDialog'), model, selectedActivity);
+        var activityDialogController = new ActivityDialogController(activityDialogView, model);
+        $('#activityDialog').modal('show');
+
+    });
+
+
+    /**
+     * onDragStart: Add the index of the selected activity that is dragged to the
+     * event such that it can later be read again. Also mark that the activity is
+     * dragged from the parked activities.
+     */
+    $(view.container).find('.day-activity-wrapper').on('dragstart', this, function(event) {
+
+        var target = event.target;
+        while (!target.classList.contains('day-activity-wrapper')) {
+            target = target.parentNode;
+        }
+
+        target.parentNode.classList.add('dragOver');
+
+        var selectedActivityIndex = -1;
+        for (var i = 0; i < view.dayActivitiesContainer.children().length; i++) {
+            if (view.dayActivitiesContainer.children()[i] == target) {
+                selectedActivityIndex = i;
+                break;
+            }
+        }
+        if (selectedActivityIndex == -1) {
+            console.log('Error: selected activity not found');
+            return;
+        }
+
+        // determine the index of the day
         var dayIndex = -1;
         for (var i = 0; i < model.days.length; i++) {
             if (model.days[i] == day) {
@@ -27,8 +108,7 @@ var DayController = function(view, model, day) {
             }
         }
         if (dayIndex == -1) {
-            console.log('Error: Couldn\'t determine the day.');
-            return;
+            console.log('Error: Couldn\'t find the day');
         }
 
         event.originalEvent.dataTransfer.setData("SelectedActivity", selectedActivityIndex);
@@ -36,77 +116,45 @@ var DayController = function(view, model, day) {
 
     });
 
-    // onDragOver: we need to catch this event and stop the propagation
-    // otherwise the 'drop' event won't be fired
-    view.activitiesDiv.on('dragover', this, function(event) {
-        console.log('dragover');
+    /**
+     * onDragEnter:
+     */
+    $(view.container).find('.day-activity-wrapper').on('dragenter', this, function(event) {
+        var target = event.target;
+        while (!target.classList.contains('day-activity-wrapper')) {
+            target = target.parentNode;
+        }
+        target.classList.add('dragOver');
+    });
+
+    /**
+     * onDragLeave:
+     */
+    $(view.container).find('.day-activity-wrapper').on('dragleave', this, function(event) {
+        var target = event.target;
+        if (!target.classList.contains('day-activity-wrapper')) {
+            return;
+        }
+        target.classList.remove('dragOver');
+    });
+
+    /**
+     * onDragOver:
+     */
+    $(view.container).find('.day-activity-wrapper').on('dragover', this, function(event) {
         event.preventDefault();
         event.stopPropagation();
     });
 
-//    $('.activity').on('dragover', this, function(event) {
-//
-//        console.log('drag over activity');
-//
-//        var mouse_y = event.originalEvent.y;
-//
-//        var target_y = $(event.target).position().top;
-//        var target_height = $(event.target).height();
-//
-////        console.log('mouse_y = ' + mouse_y);
-////        console.log('target_y = ' + target_y);
-////        console.log('target_h = ' + target_height);
-//
-//        if (mouse_y - 10 < (target_y + target_height / 2)) {
-//            event.target.classList.add('dropOverTop');
-//            event.target.classList.remove('dragOverBottom');
-//        } else {
-//            event.target.classList.add('dropOverBottom');
-//            event.target.classList.remove('dragOverTop');
-//        }
-//
-//    });
+    /**
+     * onDrop:
+     */
+    $(view.container).find('.day-activity-wrapper').on('drop', this, function(event) {
 
-//    $('.activity').on('dragenter', this, function(event) {
-//        console.log(event);
-//
-//    });
-
-//    $('.activity').on('dragleave', this, function(event) {
-//        console.log('drag leave activity');
-//        event.target.classList.remove('dragOverTop');
-//        event.target.classList.remove('dragOverBottom');
-//    });
-
-    // onDragEnter:
-    view.activitiesDiv.on('dragenter', this, function(event) {
-        console.log('dragenter');
-        event.target.classList.add('over');
-    });
-
-    // onDragLeave:
-    view.activitiesDiv.on('dragleave', this, function(event) {
-        console.log('dragleave');
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.classList.remove('over');
-    });
-
-    view.activitiesDiv.on('dragend', this, function(event) {
-       console.log('dragend');
-    });
-
-    // onDrop:
-    view.activitiesDiv.on('drop', this, function(event) {
-
-        console.log('drop');
+        console.log('drop: wrapper');
 
         event.preventDefault();
         event.stopPropagation();
-
-        event.target.classList.remove('over');
-
-        console.log(event);
 
         var selectedActivityIndex = event.originalEvent.dataTransfer.getData("SelectedActivity");
         var from = event.originalEvent.dataTransfer.getData("From");
@@ -114,6 +162,26 @@ var DayController = function(view, model, day) {
             from = null;
         }
 
+        var target = event.target;
+        while (!target.classList.contains('day-activity-wrapper')) {
+            target = target.parentNode;
+        }
+
+        target.classList.remove('dragOver');
+
+        var droppedActivityIndex = -1;
+        for (var i = 0; i < view.dayActivitiesContainer.children().length; i++) {
+            if (view.dayActivitiesContainer.children()[i] == target) {
+                droppedActivityIndex = i;
+                break;
+            }
+        }
+        if (droppedActivityIndex == -1) {
+            console.log('Error: selected activity not found');
+            return;
+        }
+
+        // determine the index of the day
         var dayIndex = -1;
         for (var i = 0; i < model.days.length; i++) {
             if (model.days[i] == day) {
@@ -121,12 +189,71 @@ var DayController = function(view, model, day) {
             }
         }
         if (dayIndex == -1) {
-            console.log('Error: Couldn\'t determine the day.');
-            return;
+            console.log('Error: Couldn\'t find the day');
         }
 
-        // TODO: determine newposition of the activity
-        // add the activity at the end of the day
+        model.moveActivity(from, selectedActivityIndex, dayIndex, droppedActivityIndex);
+
+    });
+
+
+    /**
+     * onDragEnter: If an element is dragged over the parkedActivitiesContainer
+     * highlight the container with a dashed red border so that it's clear that
+     * the element can dropped here.
+     */
+    view.dayActivitiesContainer.on('dragenter', this, function(event) {
+        event.target.classList.add('dragOver');
+    });
+
+    /**
+     * onDragLeave: If a dragged element leaves the parkedActivitiesContainer
+     * un-highlight the container.
+     */
+    view.dayActivitiesContainer.on('dragleave', this, function(event) {
+        event.target.classList.remove('dragOver');
+    });
+
+    /**
+     * onDragOver: We need to catch this event and stop the propagation
+     * otherwise the 'drop' event won't be fired.
+     */
+    view.dayActivitiesContainer.on('dragover', this, function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    /**
+     * onDrop: Add the dragged activity at the end of the list of all
+     * parked activities.
+     */
+    view.dayActivitiesContainer.on('drop', this, function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        // un-highlight the parkedActivitiesContainer
+        event.target.classList.remove('dragOver');
+
+        var selectedActivityIndex = event.originalEvent.dataTransfer.getData("SelectedActivity");
+        var from = event.originalEvent.dataTransfer.getData("From");
+        if (from == 'null') {
+            from = null;
+        }
+
+        // determine the index of the day
+        var dayIndex = -1;
+        for (var i = 0; i < model.days.length; i++) {
+            if (model.days[i] == day) {
+                dayIndex = i;
+            }
+        }
+        if (dayIndex == -1) {
+            console.log('Error: Couldn\'t find the day');
+        }
+
+        // since the activity wasn't dropped on another activity, we add the dropped
+        // activity at the end of the day
         model.moveActivity(from, selectedActivityIndex, dayIndex, null);
 
     });

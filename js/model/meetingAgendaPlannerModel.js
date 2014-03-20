@@ -74,7 +74,6 @@ function Day(startH,startM,id) {
 	// sets the start time to new value
 	this.setStart = function(startH,startM) {
 		this._start = startH * 60 + startM;
-		model.notifyObservers();
 	};
 
 	// returns the total length of the acitivities in 
@@ -97,6 +96,17 @@ function Day(startH,startM,id) {
 		var end = this._start + this.getTotalLength();
         return formatTime(end, end);
 	};
+
+    this.getStartOfActivity = function(activity) {
+        var startTime = this._start;
+        for (var i = 0; i < this._activities.length; i++) {
+            if (this._activities[i] == activity) {
+                break;
+            }
+            startTime += this._activities[i].getLength();
+        }
+        return startTime;
+    }
 	
 	// returns the string representation Hours:Minutes of 
 	// the start time of the day
@@ -151,6 +161,11 @@ function MeetingAgendaPlannerModel(){
 
 	this.days = [];
 	this.parkedActivities = [];
+
+    this.setStartOfDay = function(day, startH, startM) {
+        day.setStart(startH, startM);
+        this.notifyObservers();
+    }
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
@@ -245,6 +260,12 @@ function MeetingAgendaPlannerModel(){
         act = this.parkedActivities.splice(position,1)[0];
         return act;
     };
+
+    // remove an activity from a certain day
+    this.removeActivity = function(day, position) {
+        day._activities.splice(position, 1);
+        this.notifyObservers();
+    }
 
     // moves activity between the days, or day and parked activities.
     // to park activity you need to set the new day to null
