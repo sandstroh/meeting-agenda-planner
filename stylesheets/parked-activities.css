@@ -1,10 +1,18 @@
-#parkedActivitiesContainer {
+/*#parkedActivitiesContainer {*/
+    /*border: dashed grey;*/
+    /*min-height: 592px;*/
+/*}*/
+/*#parkedActivitiesContainer.dragOver {*/
+    /*border: dashed red;*/
+/*}*/
+.parked-activities-container {
     border: dashed grey;
     min-height: 592px;
 }
-#parkedActivitiesContainer.dragOver {
+.parked-activities-container.dragOver {
     border: dashed red;
 }
+
 
 .parked-activity-wrapper {
     margin: 5px;

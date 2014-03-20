@@ -232,6 +232,9 @@ var ParkedActivitiesController = function(view, model) {
      */
     view.parkedActivitiesContainer.on('drop', this, function(event) {
 
+        console.log('---------------------------------------------------------------');
+        console.log('Drop on parkedActivitiesContainer');
+
         event.preventDefault();
         event.stopPropagation();
 
@@ -243,6 +246,10 @@ var ParkedActivitiesController = function(view, model) {
         if (from == 'null') {
             from = null;
         }
+
+        console.log('from = ' + from);
+        console.log('activityIndex = ' + selectedActivityIndex);
+        console.log('---------------------------------------------------------------');
 
         // since the activity was dropped on another activity, we add the dropped
         // activity at the end

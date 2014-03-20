@@ -272,11 +272,13 @@ function MeetingAgendaPlannerModel(){
     // to move a parked activity to let's say day 0 you set oldday to null
     // and new day to 0
     this.moveActivity = function(oldday, oldposition, newday, newposition) {
+
         // added: check if we don't have to move the activity
         if (oldday == newday && oldposition == newposition) {
             // nothing to do here...
             return;
         }
+
         if(oldday !== null && oldday == newday) {
             this.days[oldday]._moveActivity(oldposition,newposition);
         }else if(oldday == null && newday == null) {
@@ -292,24 +294,26 @@ function MeetingAgendaPlannerModel(){
                 }
             }
         }else if(oldday == null) {
-            var activity = this.removeParkedActivity(oldposition);
+            var activity = this._removeParkedActivity(oldposition);
             this.days[newday]._addActivity(activity,newposition);
         }else if(newday == null) {
             var activity = this.days[oldday]._removeActivity(oldposition);
-            this.addParkedActivity(activity);
+            this._addParkedActivity(activity);
         } else {
             var activity = this.days[oldday]._removeActivity(oldposition);
             this.days[newday]._addActivity(activity,newposition);
         }
+
         this.notifyObservers();
+
     };
 
     this.createTestData = function() {
 
         this.addParkedActivity(new Activity("Test Presentation", 15, 0, "Description..."));
         this.addParkedActivity(new Activity("Test Discussion", 30, 2, "Description..."));
-        this.addParkedActivity(new Activity("A long Break", 120, 3, "blub"));
-        this.addParkedActivity(new Activity("Test Group Work", 20, 1, "blub"));
+//        this.addParkedActivity(new Activity("A long Break", 120, 3, "blub"));
+//        this.addParkedActivity(new Activity("Test Group Work", 20, 1, "blub"));
 
         this.addDay();
         this.addActivity(new Activity("Introduction", 10, 0, ""), 0);

@@ -4,7 +4,7 @@
 var ParkedActivitiesView = function(container, model) {
 
     this.container = container;
-    this.parkedActivitiesContainer = container.find('#parkedActivitiesContainer');
+    this.parkedActivitiesContainerWrapper = container.find('#parkedActivitiesContainer');
     this.addNewActivityButton = container.find('#addActivityButton');
 
     // register this view as an observer to the model
@@ -16,7 +16,24 @@ var ParkedActivitiesView = function(container, model) {
         console.log('parkedActivitiesView.update()');
 
         // reset parked activities container (delete all previous parked activities)
-        this.parkedActivitiesContainer.empty();
+        this.parkedActivitiesContainerWrapper.empty();
+
+        /**
+         * Why do we have a wrapper div around the parkedActivitiesContainer?
+         *
+         * The problem is that if the ParkedActivitiesController listens to events
+         * of an element that doesn't get deleted after the model gets updated, we
+         * create a new controller each time the model is updated (for the reasons
+         * please see below), we may have several controller that listen to the events
+         * of the same div.
+         * But if the ParkedActivitiesController listens to events of a div (the
+         * parekedActivitesContainer) and we delete this div on each model update
+         * we have at each point of time only one controller that listens to the
+         * event of this div.
+         */
+        this.parkedActivitiesContainer = $('<div>');
+        this.parkedActivitiesContainer.addClass('parked-activities-container');
+//        this.parkedActivitiesContainer.attr('style', 'min-height: 590px;');
 
         // add all parked activities
         console.log("#parkedActivites = " + model.parkedActivities.length);
@@ -77,9 +94,12 @@ var ParkedActivitiesView = function(container, model) {
                 placement:  'bottom'
             });
 
+//            this.parkedActivitiesContainer.append(activityWrapperDiv);
             this.parkedActivitiesContainer.append(activityWrapperDiv);
 
         }
+
+        this.parkedActivitiesContainerWrapper.append(this.parkedActivitiesContainer);
 
         /**
          * Why do we create the controller for this view here and update it on each model update?
