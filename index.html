@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="stylesheets/activities.css">
     <link rel="stylesheet" href="stylesheets/parked-activities.css">
     <link rel="stylesheet" href="stylesheets/activity-dialog.css">
+    <link rel="stylesheet" href="stylesheets/day-view.css">
+    <link rel="stylesheet" href="stylesheets/edit-time-dialog.css">
+
     <link rel="shortcut icon" href="images/favicon.ico">
+
 </head>
 <body>
 
@@ -54,52 +58,9 @@
         <!-- activity dialog view -->
     </div>
 
-    <!-- Old Activity Dialog View -->
-    <!-- We keep it here because it's easier to test changes for the dialog here by editing the
-         HTML instead of directly hacking the JavaScript view. -->
-    <!--<div class="modal fade" id="activityDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-        <!--<div class="modal-dialog">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-                    <!--<h4 class="modal-title" id="activityDialogLabel">Add New Activity...</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--<table class="activitydialog-table">-->
-                        <!--<tr>-->
-                            <!--<td>Name:</td>-->
-                            <!--<td><input id="activityName" type="text" class="form-control"/></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Length:</td>-->
-                            <!--<td><input id="activityLength" type="number" min="1" max="1440" class="form-control"/></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Type:</td>-->
-                            <!--<td>-->
-                                <!--<select id="activityType" class="form-control">-->
-                                    <!--<option value="0">Presentation</option>-->
-                                    <!--<option value="1">Group Work</option>-->
-                                    <!--<option value="2">Discussion</option>-->
-                                    <!--<option value="3">Break</option>-->
-                                <!--</select>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Description:</td>-->
-                            <!--<td><input id="activityDescription" type="text" class="form-control"/></td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button id="cancelAddingNewActivityButton" type="button"-->
-                            <!--class="btn btn-default" data-dismiss="modal">Cancel</button>-->
-                    <!--<button id="addNewActivityButton" type="button"-->
-                            <!--class="btn btn-primary" data-dismiss="modal">Add Activity</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="modal fade" id="editTimeDialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <!-- edit time dialog view -->
+    </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -116,14 +77,14 @@
     <script src="js/view/activityDialogView.js"></script>
     <script src="js/controller/activityDialogController.js"></script>
 
+    <script src="js/view/editTimeDialogView.js"></script>
+    <script src="js/controller/editTimeDialogController.js"></script>
+
     <script src="js/view/meetingsView.js"></script>
     <script src="js/controller/meetingsController.js"></script>
 
     <script src="js/view/dayView.js"></script>
     <script src="js/controller/dayController.js"></script>
-
-    <script src="js/view/halitTestView.js"></script>
-    <script src="js/controller/halitTestController.js"></script>
 
     <script src="js/view/canvasView.js"></script>
 
