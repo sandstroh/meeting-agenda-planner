@@ -18,20 +18,24 @@
 
     <div class="container">
         <div class="row">
-            <div style="background-color:#6495ed;text-align:center;height:100px;padding-top:11px;">
-                <h1><strong>WELCOME TO THE SCHEDULE PLANNER</strong></h1>
+            <div>
+                <p style="text-align:center;height:100px;padding-top:24px;font-size:250%;border:2px solid;border-radius:25px;" class="bg-primary">
+                        <strong>WELCOME TO THE MEETING PLANNER</strong>
+                </p>
             </div>
+
             <!-- Parked Activities View -->
             <div id="parkedActivitiesView" class="col-md-4">
                 <h4>Activities:</h4>
                 <div id="parkedActivitiesContainer">
                     <!-- container for parked activities-->
                 </div>
-                <button id="addActivityButton" type="button" class="btn">Add New Activity</button>
+                <button id="addActivityButton" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Add New Activity</button>
             </div>
 
             <!-- Meetings View -->
-            <div id="meetingsView" class="col-md-8">
+            <div id="meetingsView" class="col-md-8" style="padding-bottom:20px;">
                 <h4>Meeting:</h4>
                 <!--<div id="dayViewsContainer">-->
                     <!--&lt;!&ndash; container for days &ndash;&gt;-->
@@ -40,7 +44,9 @@
                 <button id="addDayButton" type="button" class="btn btn-success">
                     <span class="glyphicon glyphicon-plus-sign"></span> Add Day</button>
             </div>
-
+        </div>
+        <div class="bg-primary" style="border:2px solid;border-radius:25px;background-color:#428bca;text-align:center;height:100px;padding-top:11px;background-color:##ECF1EF;">
+            <p class="bg-primary"></p>
         </div>
     </div>
 
