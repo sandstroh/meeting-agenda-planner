@@ -329,17 +329,17 @@ function MeetingAgendaPlannerModel(){
 
     this.createTestData = function() {
 
-        this.addParkedActivity(new Activity("Test Presentation", 15, 0, "Description..."));
-        this.addParkedActivity(new Activity("Test Discussion", 30, 2, "Description..."));
-//        this.addParkedActivity(new Activity("A long Break", 120, 3, "blub"));
-//        this.addParkedActivity(new Activity("Test Group Work", 20, 1, "blub"));
+        this.addParkedActivity(new Activity("Introduction", 15, 0, "Briefly introducing what we gonna to today."));
+        this.addParkedActivity(new Activity("Gathering Ideas", 30, 2, "All together, gather some ideas what could be interesting to investigate further."));
+        this.addParkedActivity(new Activity("Lunch Break", 60, 3, "Time to eat something."));
+        this.addParkedActivity(new Activity("Show Results", 20, 0, "Each group will present what they have found out."));
 
         this.addDay();
-        this.addActivity(new Activity("Introduction", 10, 0, ""), 0);
-        this.addActivity(new Activity("Idea 1", 30, 0, ""), 0);
-        this.addActivity(new Activity("Working in groups", 35, 1, ""), 0);
-        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
-        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
+        this.addActivity(new Activity("Introduction", 10, 0, "Brief Introduction to the work shop."), 0);
+        this.addActivity(new Activity("Idea 1", 30, 0, "Presentation of the idea we have and how it could be useful."), 0);
+        this.addActivity(new Activity("Working in groups", 35, 1, "Each group (of 4 people) work independently on the idea."), 0);
+        this.addActivity(new Activity("Idea 1 discussion", 15, 2, "Discussion of the results of each group."), 0);
+        this.addActivity(new Activity("Coffee break", 20, 3, "Coffee, coffee, coffee!"), 0);
 
 //        this.addDay();
 //        this.addActivity(new Activity("Presentation", 30, 0, ""), 1);
