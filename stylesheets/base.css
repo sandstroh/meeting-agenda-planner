@@ -13,3 +13,8 @@
 .activitiesDiv.over {
     border: dashed red 2px;
 }
+
+#overallDayContainer {
+    display: table-row;
+    overflow: hidden;
+}
