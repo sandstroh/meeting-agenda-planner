@@ -10,7 +10,7 @@ var EditTimeDialog = function(container, model, day) {
         this.createDialog();
 
         // set the input field to the current start time of the day
-        this.input.val(day.getStart());
+        this.newStartTimeInput.val(day.getStart());
 
     }
 
@@ -45,30 +45,30 @@ var EditTimeDialog = function(container, model, day) {
         var table = $('<table>');
         var tr = $('<tr>');
         var td1 = $('<td>');
-        this.input = $('<input>');
-        this.input.attr('type', 'text');
-        this.input.addClass('form-control');
-        this.input.addClass('time-input-text');
-        this.input.attr('placeholder', 'HH:MM');
-        td1.append(this.input);
+        this.newStartTimeInput = $('<input>');
+        this.newStartTimeInput.attr('type', 'text');
+        this.newStartTimeInput.addClass('form-control');
+        this.newStartTimeInput.addClass('time-input-text');
+        this.newStartTimeInput.attr('placeholder', 'HH:MM');
+        td1.append(this.newStartTimeInput);
         var td2 = $('<td>');
-        this.button = $('<button>');
-        this.button.addClass('time-save-button');
-        this.button.attr('type', 'button');
-        this.button.addClass('btn btn-primary');
-        this.button.html('Save');
-        this.button.attr('data-dismiss', 'modal');
-        td2.append(this.button);
+        this.saveNewStartTimeButton = $('<button>');
+        this.saveNewStartTimeButton.addClass('time-save-button');
+        this.saveNewStartTimeButton.attr('type', 'button');
+        this.saveNewStartTimeButton.addClass('btn btn-primary');
+        this.saveNewStartTimeButton.html('Save');
+        this.saveNewStartTimeButton.attr('data-dismiss', 'modal');
+        td2.append(this.saveNewStartTimeButton);
         tr.append(td1);
         tr.append(td2);
         table.append(tr);
 
-        this.label = $('<label>');
-        this.label.html('Invalid time format');
-        this.label.addClass('error-label');
+        this.timeFormatErrorLabel = $('<label>');
+        this.timeFormatErrorLabel.html('Invalid time format');
+        this.timeFormatErrorLabel.addClass('error-label');
 
         modalDialogBodyDiv.append(table);
-        modalDialogBodyDiv.append(this.label);
+        modalDialogBodyDiv.append(this.timeFormatErrorLabel);
 
 
         modalDialogContentDiv.append(modalDialogHeaderDiv);

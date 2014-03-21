@@ -3,16 +3,16 @@
  */
 var EditTimeDialogController = function(view, model, day) {
 
-    view.button.on('click', this, function(event) {
+    view.saveNewStartTimeButton.on('click', this, function(event) {
 
         // get the input
-        var newtime = view.input.val();
+        var newtime = view.newStartTimeInput.val();
 
         // check if has a valid time format: HH:MM
         if (!isValidTime(newtime)) {
             event.preventDefault();
             event.stopPropagation();
-            view.label.addClass('error');
+            view.timeFormatErrorLabel.addClass('error');
             return;
         }
 
