@@ -61,6 +61,10 @@ var ActivityDialogController = function(view, model, activity, day) {
             view.activityLengthErrorLabel.addClass('error');
             return;
         }
+        // the value we got from the dialog is a string and we have to convert
+        // it to an integer, otherwise we get weird results when computing the total
+        // length of a day (found out the hard way ;-))
+        length = parseInt(length);
 
         // get the type of the activity
         var type = view.activityType.val();
@@ -124,6 +128,10 @@ var ActivityDialogController = function(view, model, activity, day) {
             view.activityLengthErrorLabel.addClass('error');
             return;
         }
+        // the value we got from the dialog is a string and we have to convert
+        // it to an integer, otherwise we get weird results when computing the total
+        // length of a day (found out the hard way ;-))
+        length = parseInt(length);
 
         // get the type of the activity
         var type = view.activityType.val();

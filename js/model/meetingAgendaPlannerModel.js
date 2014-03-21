@@ -67,6 +67,7 @@ function Activity(name,length,typeid,description){
 // but there is also a specific function in the Model that adds
 // days to the model, so you don't need call this yourself.
 function Day(startH,startM,id) {
+
 	this._start = startH * 60 + startM;
 	this._activities = [];
 	this.id = id;
@@ -76,13 +77,13 @@ function Day(startH,startM,id) {
 		this._start = startH * 60 + startM;
 	};
 
-	// returns the total length of the acitivities in 
+	// returns the total length of the activities in
 	// a day in minutes
 	this.getTotalLength = function () {
 		var totalLength = 0;
-		$.each(this._activities,function(index,activity){
-			totalLength += activity.getLength();
-		});
+        for (var i = 0; i < this._activities.length; i++) {
+            totalLength += this._activities[i].getLength();
+        }
 		return totalLength;
 	};
 
@@ -192,8 +193,7 @@ function MeetingAgendaPlannerModel(){
         this.notifyObservers();
 	}
 
-	this.getIdOfDay = function(day)
-	{
+	this.getIdOfDay = function(day)	{
 	    for(var i = 0; i < this.days.length; i++)
 	    {
 	        if(this.days[i] == day)
