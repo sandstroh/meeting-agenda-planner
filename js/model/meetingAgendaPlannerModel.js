@@ -67,6 +67,7 @@ function Activity(name,length,typeid,description){
 // but there is also a specific function in the Model that adds
 // days to the model, so you don't need call this yourself.
 function Day(startH,startM,id) {
+
 	this._start = startH * 60 + startM;
 	this._activities = [];
 	this.id = id;
@@ -76,13 +77,13 @@ function Day(startH,startM,id) {
 		this._start = startH * 60 + startM;
 	};
 
-	// returns the total length of the acitivities in 
+	// returns the total length of the activities in
 	// a day in minutes
 	this.getTotalLength = function () {
 		var totalLength = 0;
-		$.each(this._activities,function(index,activity){
-			totalLength += activity.getLength();
-		});
+        for (var i = 0; i < this._activities.length; i++) {
+            totalLength += this._activities[i].getLength();
+        }
 		return totalLength;
 	};
 
@@ -192,8 +193,7 @@ function MeetingAgendaPlannerModel(){
         this.notifyObservers();
 	}
 
-	this.getIdOfDay = function(day)
-	{
+	this.getIdOfDay = function(day)	{
 	    for(var i = 0; i < this.days.length; i++)
 	    {
 	        if(this.days[i] == day)
@@ -267,6 +267,25 @@ function MeetingAgendaPlannerModel(){
         this.notifyObservers();
     }
 
+    this.editActivity = function(day, oldActivity, editedActivity) {
+        var edited = false;
+        for (var i = 0; i < this.days.length; i++) {
+            if (this.days[i] == day) {
+                for (var j = 0; j < this.days[i].getActivities().length; j++) {
+                    if (this.days[i].getActivities()[j] == oldActivity) {
+                        this.days[i].getActivities()[j] = editedActivity;
+                        edited = true;
+                    }
+                }
+            }
+        }
+        if (edited) {
+            this.notifyObservers();
+        } else {
+            console.log('Error: Couldn\'t edit activity.');
+        }
+    }
+
     // moves activity between the days, or day and parked activities.
     // to park activity you need to set the new day to null
     // to move a parked activity to let's say day 0 you set oldday to null
@@ -310,17 +329,17 @@ function MeetingAgendaPlannerModel(){
 
     this.createTestData = function() {
 
-        this.addParkedActivity(new Activity("Test Presentation", 15, 0, "Description..."));
-        this.addParkedActivity(new Activity("Test Discussion", 30, 2, "Description..."));
-//        this.addParkedActivity(new Activity("A long Break", 120, 3, "blub"));
-//        this.addParkedActivity(new Activity("Test Group Work", 20, 1, "blub"));
+        this.addParkedActivity(new Activity("Introduction", 15, 0, "Briefly introducing what we gonna to today."));
+        this.addParkedActivity(new Activity("Gathering Ideas", 30, 2, "All together, gather some ideas what could be interesting to investigate further."));
+        this.addParkedActivity(new Activity("Lunch Break", 60, 3, "Time to eat something."));
+        this.addParkedActivity(new Activity("Show Results", 20, 0, "Each group will present what they have found out."));
 
         this.addDay();
-        this.addActivity(new Activity("Introduction", 10, 0, ""), 0);
-        this.addActivity(new Activity("Idea 1", 30, 0, ""), 0);
-        this.addActivity(new Activity("Working in groups", 35, 1, ""), 0);
-        this.addActivity(new Activity("Idea 1 discussion", 15, 2, ""), 0);
-        this.addActivity(new Activity("Coffee break", 20, 3, ""), 0);
+        this.addActivity(new Activity("Introduction", 10, 0, "Brief Introduction to the work shop."), 0);
+        this.addActivity(new Activity("Idea 1", 30, 0, "Presentation of the idea we have and how it could be useful."), 0);
+        this.addActivity(new Activity("Working in groups", 35, 1, "Each group (of 4 people) work independently on the idea."), 0);
+        this.addActivity(new Activity("Idea 1 discussion", 15, 2, "Discussion of the results of each group."), 0);
+        this.addActivity(new Activity("Coffee break", 20, 3, "Coffee, coffee, coffee!"), 0);
 
 //        this.addDay();
 //        this.addActivity(new Activity("Presentation", 30, 0, ""), 1);

@@ -18,7 +18,13 @@ var DayView = function(container, model, day) {
 
         this.deleteDayButton = $("<span>");
         this.deleteDayButton.addClass("glyphicon glyphicon-remove");
-        this.deleteDayButton.addClass('delete-day-button');
+        this.deleteDayButton.addClass('delete-day-x');
+        // add a tooltip that makes it clear that with a click on the 'x'
+        // the day gets deleted (not closed or something like that)
+        this.deleteDayButton.tooltip({
+            title: 'Delete this day',
+            placement:  'bottom'
+        });
 
         dayTitleDiv.append(this.deleteDayButton);
 
@@ -117,8 +123,8 @@ var DayView = function(container, model, day) {
             // activity delete X
             var deleteSpan = $('<span>');
             deleteSpan.addClass('col-md-1');
-            deleteSpan.addClass('glyphicon');
-            deleteSpan.addClass('glyphicon-remove');
+            deleteSpan.addClass('glyphicon glyphicon-remove');
+            deleteSpan.addClass('delete-activity-x');
 
             // append activity spans to activity div
             activityDiv.append(lengthSpan);

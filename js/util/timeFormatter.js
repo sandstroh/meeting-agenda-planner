@@ -1,6 +1,10 @@
 /**
  * Created by sandstroh on 3/6/14.
  */
+
+/**
+ * Formats the time nicely, i.e. 8:5 becomes 8:05
+ */
 function formatTime(startH, startM) {
     var timeH = Math.floor(startH/60);
     var timeM = startM % 60;
@@ -12,6 +16,13 @@ function formatTime(startH, startM) {
     }
     return time;
 }
+
+/**
+ * Checks if the given time has the format HH:MM
+ * @param time string that should be checked
+ * @returns {boolean} true if the input has the right format or false
+ * otherwise
+ */
 function isValidTime(time) {
 
     if (time.indexOf(':') == -1) {

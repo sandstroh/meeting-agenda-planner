@@ -1,15 +1,15 @@
 /**
  * Created by sandstroh on 3/3/14.
  */
-var ActivityDialogController = function(view, model) {
+var ActivityDialogController = function(view, model, activity, day) {
 
-    view.cancelButton.click(function() {
-        view.activity = null;
-    });
-
+    /**
+     * On a click on the OK button either add a new activity or edit the
+     * given one (depending on for which purpose the dialog was created).
+     */
     view.okButton.click(function(event) {
 
-        if (view.activity == null) {
+        if (activity == null) {
             addNewActivity();
         } else {
             editActivity();
@@ -17,10 +17,20 @@ var ActivityDialogController = function(view, model) {
 
     });
 
+    /**
+     * Checks if a given value is a number or not.
+     * @param n value that should be checked
+     * @returns {boolean} true if the given value is a number and false
+     * otherwise
+     */
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    /**
+     * Edits the given activity, i.e. replaces it with a new activity
+     * that is created based on the values specified through the dialog.
+     */
     function editActivity() {
 
         // get the name of the activity
@@ -51,6 +61,10 @@ var ActivityDialogController = function(view, model) {
             view.activityLengthErrorLabel.addClass('error');
             return;
         }
+        // the value we got from the dialog is a string and we have to convert
+        // it to an integer, otherwise we get weird results when computing the total
+        // length of a day (found out the hard way ;-))
+        length = parseInt(length);
 
         // get the type of the activity
         var type = view.activityType.val();
@@ -72,10 +86,18 @@ var ActivityDialogController = function(view, model) {
 
         // create new activity and replace the old activity in the model
         var editedActivity = new Activity(name, length, type, description);
-        model.editParkedActivity(view.activity, editedActivity);
+        if (day == null) {
+            model.editParkedActivity(activity, editedActivity);
+        } else {
+            model.editActivity(day, activity, editedActivity);
+        }
 
     }
 
+    /**
+     * Add a new activity to the parked activity. Creates the activity based
+     * on the values that were specified through the dialog.
+     */
     function addNewActivity() {
 
         // get the name of the activity
@@ -106,6 +128,10 @@ var ActivityDialogController = function(view, model) {
             view.activityLengthErrorLabel.addClass('error');
             return;
         }
+        // the value we got from the dialog is a string and we have to convert
+        // it to an integer, otherwise we get weird results when computing the total
+        // length of a day (found out the hard way ;-))
+        length = parseInt(length);
 
         // get the type of the activity
         var type = view.activityType.val();

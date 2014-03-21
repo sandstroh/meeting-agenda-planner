@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>Meeting Agenda Planner</title>
+    <title>Meeting Agenda Builder</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -20,11 +20,15 @@
 </head>
 <body>
 
+
+
     <div class="container">
+
         <div class="row">
+
             <div>
-                <p style="text-align:center;height:100px;padding-top:24px;font-size:250%;border:2px solid;border-radius:25px;" class="bg-primary">
-                        <strong>WELCOME TO THE MEETING AGENDA BUILDER</strong>
+                <p class="header-p">
+                    Meeting Agenda Builder
                 </p>
             </div>
 
@@ -41,10 +45,7 @@
             <!-- Meetings View -->
             <div id="meetingsView" class="col-md-8" style="padding-bottom:20px;">
                 <h4>Meeting:</h4>
-                <!--<div id="dayViewsContainer">-->
-                    <!--&lt;!&ndash; container for days &ndash;&gt;-->
-                <!--</div>-->
-                <div id="overallDayContainer" style="display: table-row;overflow:hidden;">
+                <div id="overallDayContainer">
                 </div>
 
                 <div id="addDayButtonDiv">
@@ -54,9 +55,7 @@
 
             </div>
         </div>
-        <div class="bg-primary" style="border:2px solid;border-radius:25px;background-color:#428bca;text-align:center;height:100px;padding-top:11px;background-color:##ECF1EF;">
-            <p class="bg-primary"></p>
-        </div>
+
     </div>
 
     <div class="modal fade" id="activityDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -66,6 +65,8 @@
     <div class="modal fade" id="editTimeDialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <!-- edit time dialog view -->
     </div>
+
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>

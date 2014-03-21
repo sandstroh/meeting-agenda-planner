@@ -1,7 +1,7 @@
 /**
  * Created by sandstroh on 3/3/14.
  */
-var ActivityDialogView = function(container, model, activity) {
+var ActivityDialogView = function(container, model, activity, day) {
 
     /**
      * Explanation why we create the dialog here with JavaScript instead of having it
@@ -28,8 +28,6 @@ var ActivityDialogView = function(container, model, activity) {
      * that it was the best solution regarding having a good MVC architecture for our
      * application.
      */
-
-    this.activity = activity;
 
     this.update = function() {
 

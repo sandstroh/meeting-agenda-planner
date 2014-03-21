@@ -1,6 +1,8 @@
-Interaction Programing - Final Project - HTML
-=============================================
+Interaction Programing - Final Project
+======================================
 
-This project contains the code for the HTML version of the proposed idea of a meeting agenda planner.
+We implemented the proposed Meeting Agenda Builder with JavaScript.
 
-To start: run index.html
+Note: We tested the application with Chrome and optimized it for this browser. It may look different with other webbrowsers.
+
+To run it: open index.html

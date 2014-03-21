@@ -13,27 +13,6 @@ var ParkedActivitiesController = function(view, model) {
     });
 
 
-//    /**
-//     * Display the 'X' for delete an activity.
-//     */
-//    $(view.container).find('.parked-activity-wrapper').on('mouseenter', this, function(event) {
-//        var target = event.target;
-//        while (!target.classList.contains('parked-activity-wrapper')) {
-//            target = target.parentNode;
-//        }
-//        target.classList.add('mouseOver');
-//    });
-//    /**
-//     * Hide the 'X' for delete an activity.
-//     */
-//    $(view.container).find('.parked-activity-wrapper').on('mouseleave', this, function(event) {
-//        var target = event.target;
-//        while (!target.classList.contains('parked-activity-wrapper')) {
-//            target = target.parentNode;
-//        }
-//        target.classList.remove('mouseOver');
-//    });
-
     /**
      * Delete the activity on a click on the 'X'.
      */
@@ -72,9 +51,6 @@ var ParkedActivitiesController = function(view, model) {
             target = target.parentNode;
         }
 
-        // hide the 'X' for delete an activity
-//        target.classList.remove('mouseOver');
-
         // determine the index of the activity
         var selectedActivityIndex = -1;
         for (var i = 0; i < view.parkedActivitiesContainer.children().length; i++) {
@@ -90,7 +66,7 @@ var ParkedActivitiesController = function(view, model) {
         var selectedActivity = model.parkedActivities[selectedActivityIndex];
 
         var activityDialogView = new ActivityDialogView($('#activityDialog'), model, selectedActivity);
-        var activityDialogController = new ActivityDialogController(activityDialogView, model);
+        var activityDialogController = new ActivityDialogController(activityDialogView, model, selectedActivity);
         $('#activityDialog').modal('show');
 
     });
@@ -130,7 +106,9 @@ var ParkedActivitiesController = function(view, model) {
     });
 
     /**
-     * onDragEnter:
+     * onDragEnter: apply style properties to the activity on which the mouse is such that
+     * above the activity is some space that indicates where the dragged activity will be
+     * dropped.
      */
     $(view.container).find('.parked-activity-wrapper').on('dragenter', this, function(event) {
         var target = event.target;
@@ -141,7 +119,7 @@ var ParkedActivitiesController = function(view, model) {
     });
 
     /**
-     * onDragLeave:
+     * onDragLeave: revert the style properties applied above.
      */
     $(view.container).find('.parked-activity-wrapper').on('dragleave', this, function(event) {
         var target = event.target;
