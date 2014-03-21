@@ -3,6 +3,10 @@
  */
 var DayController = function(view, model, day) {
 
+    /**
+     * On a click on the time icon show a EditTimeDialog such that the user can edit
+     * the start time of the day.
+     */
     view.spanAddon.click(function() {
         var editTimeDialog = new EditTimeDialog($('#editTimeDialog'), model, day);
         var editTimeDialogController = new EditTimeDialogController(editTimeDialog, model, day);
@@ -44,7 +48,7 @@ var DayController = function(view, model, day) {
     });
 
     /**
-     * Show an 'Edit Activity' dialog, after a double-click on an activity.
+     * Show an 'Edit Activity' dialog after a double-click on an activity.
      */
     $(view.container).find('.day-activity-wrapper').on('dblclick', this, function(event) {
 
@@ -117,7 +121,9 @@ var DayController = function(view, model, day) {
     });
 
     /**
-     * onDragEnter:
+     * onDragEnter: apply style properties to the activity on which the mouse is such that
+     * above the activity is some space that indicates where the dragged activity will be
+     * dropped.
      */
     $(view.container).find('.day-activity-wrapper').on('dragenter', this, function(event) {
         var target = event.target;
@@ -128,7 +134,7 @@ var DayController = function(view, model, day) {
     });
 
     /**
-     * onDragLeave:
+     * onDragLeave: revert the style properties applied above.
      */
     $(view.container).find('.day-activity-wrapper').on('dragleave', this, function(event) {
         var target = event.target;
@@ -139,7 +145,8 @@ var DayController = function(view, model, day) {
     });
 
     /**
-     * onDragOver:
+     * onDragOver: we need to catch this event here and have to prevent the default event
+     * handling in order to be able to drop an an dragged activity here.
      */
     $(view.container).find('.day-activity-wrapper').on('dragover', this, function(event) {
         event.preventDefault();
@@ -147,11 +154,11 @@ var DayController = function(view, model, day) {
     });
 
     /**
-     * onDrop:
+     * onDrop: Determine which activity was dragged from which day (or from the parked
+     * activities) and move the activity to the day where it was dropped. The new
+     * position of the dropped activity is above the activity on which it was dropped.
      */
     $(view.container).find('.day-activity-wrapper').on('drop', this, function(event) {
-
-        console.log('drop: wrapper');
 
         event.preventDefault();
         event.stopPropagation();
