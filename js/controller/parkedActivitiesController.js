@@ -66,7 +66,7 @@ var ParkedActivitiesController = function(view, model) {
         var selectedActivity = model.parkedActivities[selectedActivityIndex];
 
         var activityDialogView = new ActivityDialogView($('#activityDialog'), model, selectedActivity);
-        var activityDialogController = new ActivityDialogController(activityDialogView, model);
+        var activityDialogController = new ActivityDialogController(activityDialogView, model, selectedActivity);
         $('#activityDialog').modal('show');
 
     });

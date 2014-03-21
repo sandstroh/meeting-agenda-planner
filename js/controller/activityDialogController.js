@@ -1,14 +1,7 @@
 /**
  * Created by sandstroh on 3/3/14.
  */
-var ActivityDialogController = function(view, model) {
-
-    /**
-     * Cancel
-     */
-    view.cancelButton.click(function() {
-        view.activity = null;
-    });
+var ActivityDialogController = function(view, model, activity, day) {
 
     /**
      * On a click on the OK button either add a new activity or edit the
@@ -16,7 +9,7 @@ var ActivityDialogController = function(view, model) {
      */
     view.okButton.click(function(event) {
 
-        if (view.activity == null) {
+        if (activity == null) {
             addNewActivity();
         } else {
             editActivity();
@@ -89,10 +82,10 @@ var ActivityDialogController = function(view, model) {
 
         // create new activity and replace the old activity in the model
         var editedActivity = new Activity(name, length, type, description);
-        if (view.day == null) {
-            model.editParkedActivity(view.activity, editedActivity);
+        if (day == null) {
+            model.editParkedActivity(activity, editedActivity);
         } else {
-            model.editActivity(view.day, view.activity, editedActivity);
+            model.editActivity(day, activity, editedActivity);
         }
 
     }

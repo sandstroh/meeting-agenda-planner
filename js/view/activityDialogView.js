@@ -29,9 +29,6 @@ var ActivityDialogView = function(container, model, activity, day) {
      * application.
      */
 
-    this.activity = activity;
-    this.day = day;
-
     this.update = function() {
 
         this.createDialog();

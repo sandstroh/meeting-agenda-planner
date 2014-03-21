@@ -72,7 +72,7 @@ var DayController = function(view, model, day) {
         var selectedActivity = day.getActivities()[selectedActivityIndex];
 
         var activityDialogView = new ActivityDialogView($('#activityDialog'), model, selectedActivity, day);
-        var activityDialogController = new ActivityDialogController(activityDialogView, model);
+        var activityDialogController = new ActivityDialogController(activityDialogView, model, selectedActivity, day);
         $('#activityDialog').modal('show');
 
     });
