@@ -4,9 +4,11 @@
 var EditTimeDialogController = function(view, model, day) {
 
     view.button.on('click', this, function(event) {
-        var newtime = view.input.val();
-        console.log('newtime = ' + newtime);
 
+        // get the input
+        var newtime = view.input.val();
+
+        // check if has a valid time format: HH:MM
         if (!isValidTime(newtime)) {
             event.preventDefault();
             event.stopPropagation();

@@ -3,10 +3,17 @@
  */
 var ActivityDialogController = function(view, model) {
 
+    /**
+     * Cancel
+     */
     view.cancelButton.click(function() {
         view.activity = null;
     });
 
+    /**
+     * On a click on the OK button either add a new activity or edit the
+     * given one (depending on for which purpose the dialog was created).
+     */
     view.okButton.click(function(event) {
 
         if (view.activity == null) {
@@ -17,10 +24,20 @@ var ActivityDialogController = function(view, model) {
 
     });
 
+    /**
+     * Checks if a given value is a number or not.
+     * @param n value that should be checked
+     * @returns {boolean} true if the given value is a number and false
+     * otherwise
+     */
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    /**
+     * Edits the given activity, i.e. replaces it with a new activity
+     * that is created based on the values specified through the dialog.
+     */
     function editActivity() {
 
         // get the name of the activity
@@ -80,6 +97,10 @@ var ActivityDialogController = function(view, model) {
 
     }
 
+    /**
+     * Add a new activity to the parked activity. Creates the activity based
+     * on the values that were specified through the dialog.
+     */
     function addNewActivity() {
 
         // get the name of the activity
