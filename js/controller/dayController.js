@@ -19,7 +19,7 @@ var DayController = function(view, model, day) {
     /**
      * Delete the activity on a click on the 'X'.
      */
-    $(view.container).find('.glyphicon-remove').on('click', this, function(event) {
+    $(view.container).find('.delete-activity-x').on('click', this, function(event) {
 
         var target = event.target;
         while (!target.classList.contains('day-activity-wrapper')) {

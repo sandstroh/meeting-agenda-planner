@@ -11,6 +11,7 @@
     padding-left: 10px;
     border-bottom: 2px solid grey;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 .day-title-div > span {
     margin-right: 20px;
@@ -65,10 +66,13 @@
     border: dashed red;
 }
 
-.delete-day-button {
+.delete-day-x {
     float: right;
     margin-top: 0px;
     right: -13px;
+}
+.delete-day-x:hover {
+    color: red;
 }
 
 .day-activity-wrapper {
