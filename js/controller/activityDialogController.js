@@ -72,7 +72,11 @@ var ActivityDialogController = function(view, model) {
 
         // create new activity and replace the old activity in the model
         var editedActivity = new Activity(name, length, type, description);
-        model.editParkedActivity(view.activity, editedActivity);
+        if (view.day == null) {
+            model.editParkedActivity(view.activity, editedActivity);
+        } else {
+            model.editActivity(view.day, view.activity, editedActivity);
+        }
 
     }
 

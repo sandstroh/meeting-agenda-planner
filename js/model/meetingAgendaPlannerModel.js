@@ -267,6 +267,25 @@ function MeetingAgendaPlannerModel(){
         this.notifyObservers();
     }
 
+    this.editActivity = function(day, oldActivity, editedActivity) {
+        var edited = false;
+        for (var i = 0; i < this.days.length; i++) {
+            if (this.days[i] == day) {
+                for (var j = 0; j < this.days[i].getActivities().length; j++) {
+                    if (this.days[i].getActivities()[j] == oldActivity) {
+                        this.days[i].getActivities()[j] = editedActivity;
+                        edited = true;
+                    }
+                }
+            }
+        }
+        if (edited) {
+            this.notifyObservers();
+        } else {
+            console.log('Error: Couldn\'t edit activity.');
+        }
+    }
+
     // moves activity between the days, or day and parked activities.
     // to park activity you need to set the new day to null
     // to move a parked activity to let's say day 0 you set oldday to null

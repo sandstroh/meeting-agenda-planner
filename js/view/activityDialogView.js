@@ -1,7 +1,7 @@
 /**
  * Created by sandstroh on 3/3/14.
  */
-var ActivityDialogView = function(container, model, activity) {
+var ActivityDialogView = function(container, model, activity, day) {
 
     /**
      * Explanation why we create the dialog here with JavaScript instead of having it
@@ -30,6 +30,7 @@ var ActivityDialogView = function(container, model, activity) {
      */
 
     this.activity = activity;
+    this.day = day;
 
     this.update = function() {
 
