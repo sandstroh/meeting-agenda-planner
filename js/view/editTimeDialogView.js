@@ -6,7 +6,11 @@ var EditTimeDialog = function(container, model, day) {
     this.update = function() {
 
         container.empty();
+
         this.createDialog();
+
+        // set the input field to the current start time of the day
+        this.input.val(day.getStart());
 
     }
 
